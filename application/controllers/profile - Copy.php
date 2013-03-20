@@ -9,25 +9,15 @@ class Profile extends CI_Controller {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
-		define('ASSEST_URL', base_url().'teach/assets/');		
+		define('ASSEST_URL', base_url().'assets/');		
 	}
 
 	public function index()
 	{
+		echo "hello" ;
 		$data['activeTab'] = 'profileT';
-
-		// to be filled in by sql queries
-		$data['email'] = 'lol@gmail.com';
-		$data['name'] = 'Motsu';
-		$data['phone'] = '999';
-		$data['address'] = 'changi';
-		$data['description'] = 'i rock';
-		$data['gender'] = 'm';
-		$data['dob'] = "02/16/12";
-		$data['pic'] = "i dont know how";
-
-		$this->load->view('header', $data);
-		$this->load->view('profile_view');
+		$this->load->view('header.php');
+		$this->load->view('profile.htm');
 	}
 
 	public function count()

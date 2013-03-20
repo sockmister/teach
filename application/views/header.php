@@ -25,56 +25,49 @@
         <![endif]-->
 
         <!-- Fav and touch icons -->
+        <script src="<?=ASSEST_URL?>js/jquery.js"></script>
+        <script src="<?=ASSEST_URL?>js/bootstrap.js"></script>
+        <script src="<?=ASSEST_URL?>js/jasny-bootstrap.js"></script>
+        <script src="<?=ASSEST_URL?>js/bootstrap-datepicker.js"></script>
+        <script src="<?=ASSEST_URL?>js/holder.js"></script>
 
         <link href="<?=ASSEST_URL?>css/teachme.css" rel="stylesheet">
       </head>
 
-      <script src="<?=ASSEST_URL?>js/jquery.js"></script>
-      <script src="<?=ASSEST_URL?>js/bootstrap.js"></script>
-<script src="<?=ASSEST_URL?>js/jasny-bootstrap.js"></script>
-<script src="<?=ASSEST_URL?>js/bootstrap-datepicker.js"></script>
-<script src="<?=ASSEST_URL?>js/holder.js"></script>
+
 
             <!-- Le javascript
             <link href="<?=ASSEST_URL?>css/webapp/reset.css" media="screen" rel="stylesheet" type="text/css" >
 <link href="<?=ASSEST_URL?>css/webapp/grid.css" media="screen" rel="stylesheet" type="text/css" >
-      ================================================== -->
-      <!-- Javascript for toggle. Integrate with php -->
-      <script>
-
-$(document).ready(function(){
-$('#<?php echo $activeTab?>').addClass('active');
-
-}
+================================================== -->
+<!-- Javascript for toggle. Integrate with php -->
 
 
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">TeachMe!</a>
+          <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li id="profileT"><a href="<?php echo site_url("profile/index") ?>">Profile</a></li>
+            <li id="wallT"><a href="#about" >Wall</a></li>
+            <li id="friendsT"><a href="#contact">Friends</a></li>
 
-}
-</script>
-
-      <body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-          <div class="navbar-inner">
-            <div class="container">
-              <a class="brand" href="#">TeachMe!</a>
-              <div class="nav-collapse collapse">
-                <ul class="nav">
-                  <li class="active" id="profileT"><a href="#">Profile</a></li>
-                  <li id="wallT"><a href="#about" >Wall</a></li>
-                  <li id="friendsT"><a href="#contact">Friends</a></li>
-
-                      <li id="interestT"><a href="#">Explore Interests</a></li>
-                      <li id="groupT"><a href="#">My Groups</a></li>
+            <li id="interestT"><a href="#">Explore Interests</a></li>
+            <li id="groupT"><a href="<?php echo site_url("group/index") ?>">My Groups</a></li>
 
 
-                </div><!--/.nav-collapse -->
-                <ul class="nav pull-right"> 
-                  <li class="nav pull-right"><a  href="#logout">Logout</a></li>
+          </div><!--/.nav-collapse -->
+          <ul class="nav pull-right"> 
+            <li class="nav pull-right"><a  href="#logout">Logout</a></li>
 
-                </ul>
+          </ul>
 
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
+    <script>
+
+    $('#<?php echo $activeTab; ?>').addClass("active");
+    </script>
