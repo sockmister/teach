@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'index.php';
+$config['base_url']	= '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,3 +360,5 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+$config['asset'] = "application/asset/";

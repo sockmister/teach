@@ -1,9 +1,9 @@
 <?php
 /*
-This controller is just for playing and testing
+Controller for profile page
 */
 
-class Test extends CI_Controller {
+class Profile extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		// Your own constructor code
@@ -14,7 +14,10 @@ class Test extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('index.php');
+		echo "hello" ;
+		$data['activeTab'] = 'profileT';
+		$this->load->view('header.php');
+		$this->load->view('profile.htm');
 	}
 
 	public function count()
