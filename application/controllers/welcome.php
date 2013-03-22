@@ -17,10 +17,33 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct() {
+		parent::__construct();
+		// Your own constructor code
+		$this->load->helper('url');
+		$this->load->database();
+		define('ASSEST_URL', base_url().'teach/assets/');		
+	}
+
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('welcome_view.php');
 	}
+
+	public function count()
+	{
+		$query = $this->db->query('SELECT COUNT(*) FROM user');
+		print_r($query->result());
+	}
+
+	public function register()
+	{
+		echo "lol";
+		$email = $this->input->post('email');
+		print $email;
+	}
+
 }
 
 /* End of file welcome.php */

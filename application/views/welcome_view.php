@@ -10,15 +10,15 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/teachme.css" rel="stylesheet">
+<link href="<?=ASSEST_URL?>css/bootstrap.css" rel="stylesheet">
+<link href="<?=ASSEST_URL?>css/teachme.css" rel="stylesheet">
 <style type="text/css">
 body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
 </style>
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="<?=ASSEST_URL?>css/bootstrap-responsive.css" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -26,13 +26,6 @@ body {
       <![endif]-->
 
       <!-- Fav and touch icons -->
-      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-      <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
-    </head>
-
     <body>
 
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -87,7 +80,7 @@ body {
         <div class="row">
           <div class="span4">
             <h3>Create an Account. It's free!</h3>
-            <form method="post" action="<?php echo site_url('test/register'); ?>" name="form1" id="form-signup">
+            <form method="post" action="<?php echo site_url('welcome/register'); ?>" name="form1" id="form-signup">
              <fieldset>
               <label>Email</label>
               <div class="control-group" id="email-error">
@@ -122,8 +115,8 @@ body {
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.js"></script>
-    <script src="js/boostrap.js"></script>
+    <script src="<?=ASSEST_URL?>js/jquery.js"></script>
+    <script src="<?=ASSEST_URL?>js/bootstrap.js"></script>
 
     <script>
 

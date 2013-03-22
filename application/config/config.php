@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'index.php';
+$config['base_url']	= '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ $config['base_url']	= 'index.php';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = 'teach/index.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +57,7 @@ $config['uri_protocol']	= 'AUTO';
 | http://codeigniter.com/user_guide/general/urls.html
 */
 
-$config['url_suffix'] = 'index.php';
+$config['url_suffix'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,3 +360,5 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+$config['asset'] = "application/asset/";
