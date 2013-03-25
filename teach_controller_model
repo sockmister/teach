@@ -1,0 +1,13 @@
+controllers
+	profile (view and edit profile)
+	wall (view person)
+	friends (list friends,
+	explore (view all groups, join group, create group)
+	my_group (view groups i joined)
+	view_group (view all people in group, add friends)
+
+model
+	user
+	group
+	friend
+	

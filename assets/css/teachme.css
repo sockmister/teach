@@ -1,0 +1,19 @@
+.center-in-span { margin: 0 auto;}
+
+.draw-border{
+    border: 1px solid;
+}
+
+.center {
+     float: none;
+     margin-left: auto;
+     margin-right: auto; 
+ }
+    
+ label{
+ 	font-weight:bold;
+ }
+
+ .vertical-button-fixed {
+    width: 100px;
+}
