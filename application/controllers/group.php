@@ -1,6 +1,6 @@
 <?php
 /*
-Controller for profile page
+Controller for explore page
 */
 
 class Group extends CI_Controller {
