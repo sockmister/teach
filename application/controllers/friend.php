@@ -13,7 +13,8 @@ class Friend extends CI_Controller {
 	}
 
 	//retrieve list of friends of $person
-	public function list($person){
+	public function list_friend(){
+
 	}
 }
 ?>

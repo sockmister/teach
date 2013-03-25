@@ -52,11 +52,11 @@
           <div class="nav-collapse collapse">
           <ul class="nav">
             <li id="profileT"><a href="<?php echo site_url("/profile/index") ?>">Profile</a></li>
-            <li id="wallT"><a href="#about" >Wall</a></li>
-            <li id="friendsT"><a href="#contact">Friends</a></li>
+            <li id="wallT"><a href="<?php echo site_url("/wall/index") ?>" >Wall</a></li>
+            <li id="friendsT"><a href="<?php echo site_url("/friend/index") ?>">Friends</a></li>
 
-            <li id="interestT"><a href="#">Explore Interests</a></li>
-            <li id="groupT"><a href="<?php echo site_url("/group/index") ?>">My Groups</a></li>
+            <li id="interestT"><a href="<?php echo site_url("/explore/index") ?>">Explore Interests</a></li>
+            <li id="groupT"><a href="<?php echo site_url("/my_group/index") ?>">My Groups</a></li>
 
 
           </div><!--/.nav-collapse -->
