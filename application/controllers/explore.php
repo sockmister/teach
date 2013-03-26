@@ -50,22 +50,25 @@ class Explore extends CI_Controller {
 
 
 		$this->load->view('header.php', $data);
-		$this->load->view('group_view.php');
+		$this->load->view('explore_view.php');
 	}
 
 	//view all groups available
 	public function view_all(){
 	}
 
-	//join a group
-	public function join(){
-		// add group to database
-		$groupToJoin = $this->input->post('join');
-		print $groupToJoin;
+	
+	//create a group
+	public function createGroup(){
+		$email = $this->input->post('groupName');
+		print $email;
 	}
 
-	//create a group
-	public function create(){
+	//join a group
+	public function join($group){
+		echo $group;
 	}
+
+
 }
 ?>

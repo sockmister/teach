@@ -27,7 +27,7 @@ class Profile extends CI_Controller {
 		$data['pic'] = "i dont know how";
 
 		$this->load->view('header', $data);
-		$this->load->view('profile_view');
+		$this->load->view('profile_edit');
 	}
 
 	public function count()

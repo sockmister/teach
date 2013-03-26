@@ -15,11 +15,21 @@ class My_group extends CI_Controller {
 	public function index(){
 		$data['activeTab'] = "groupT";
 		$this->load->view('header', $data);
+		$this->load->view('my_group_view');
 	}
 	
-	//view all groups that person has joined
-	public function view(){
-
+	//view specific groups that person has joined
+	public function view($group){
+		$data['activeTab'] = "";
+		$data['group'] = $group;
+		$this->load->view('header', $data);
+		$this->load->view('group_view');
 	}
+
+
+	public function leave($group){
+		echo $group;
+	}
+
 }
 ?>

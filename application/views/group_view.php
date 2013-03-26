@@ -1,73 +1,73 @@
+        <div class="span8 center">
+            <h1><?php echo $group?> <a href="#" class="btn btn-primary btn-small pull-right">Join (or Leave depending on status)</a></h1>
+            <hr>
 
-        <div class="pagination pagination-centered">
-          <ul>
-            <li class="disabled"><a href="#">Prev</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">Next</a></li>
-          </ul>
+
+              <p><b>Members: </b><? 1000?></p>
+              <p><b>Description: </b> Fishing is .....</p>
+              <hr>
+
+          <h3>Members in group</h3>
+          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+      <hr>
+           <form method="post" action="<?php echo site_url('group/postComment'); ?>" id="comment-create">
+            <fieldset>
+              <label></label>
+              <textarea rows="3" class="span8" name="comment">New Comments</textarea>
+            </fieldset>
+
+            <button type="submit" class="btn">Post</button>
+          </form>
+          <hr>
+          <h4><u>Past Comments</u> </h4>
+          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
+          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
+          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
+          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
         </div>
 
-        <div class="container">
-          <div class="row center">
-             <div class="span3">
-<label>Sort By</label>
-    <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-<button type="button" class="btn vertical-button-fixed">Popularity</button>
-<button type="button" class="btn vertical-button-fixed">Date Created</button>
-<button type="button" class="btn vertical-button-fixed">Alphabetical</button>
-    ...
-    <legend>Start your own Group</legend>
-    <label>Group Name</label>
-<input class="input span3" type="text" placeholder="Group Name">
-<label>Group Description</label>
-            <textarea rows="5" class="span3"></textarea>
-    </div>
-
-</div>
-            <div class="span6 offset1"> 
-              <h1> F </h1>
-              <hr>   
-              <h3> Fishing <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-
-                <form method="post" action="<?php echo site_url("group/join") ?>" >
-                  <input type="hidden" size="25" value="Fishing" name="join"/>
-                <button type="submit"class="btn btn-primary btn-small pull-right" type="button">
-                Join</button> </h3> 
-              </form>
-              <p> Fishing is interesting because we can learn ... </p>
-              <hr>
-              <h1> J </h1>
-              <hr>
 
 
-              <h3>Juggling <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-
-                <form method="post" action="<?php echo site_url("group/join") ?>" >
-                  <input type="hidden" size="25" value="Juggling" name="join"/>
-                <button type="submit"class="btn btn-primary btn-small pull-right" type="button">
-                Join</button> </h3> 
-              </form>
-              <p> Fishing is interesting because we can learn ... </p>
-              <hr>
-            </div>
-          </div>
-        </div>
-
-<script>
-$(document).ready(function(){
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
 
 
-});
+          <!-- Le javascript
+          ================================================== -->
+          <!-- Javascript for toggle. Integrate with php -->
+          <script>
+          $("#<?php echo $gender; ?>").button('toggle');
+          $('input[id=lefile]').change(function() {
+           $('#photoCover').val($(this).val());
+         });
 
+          $('#dp').datepicker();
+
+// function to check password as user types
+function checkPass()
+{
+
+  var pass1 = document.getElementById('password');
+  var pass2 = document.getElementById('password-check');
+  var message = document.getElementById('confirmMessage');
+  var goodColor = "#66cc66";
+  var badColor = "#ff6666";
+
+  if(pass1.value == pass2.value){
+    pass2.style.backgroundColor = goodColor;
+    message.style.color = goodColor;
+    message.innerHTML = "Passwords Match!"
+  }else{
+    pass2.style.backgroundColor = badColor;
+    message.style.color = badColor;
+    message.innerHTML = "Passwords Do Not Match!"
+  }
+}
 </script>
-          </body>
-          </html>
-
-
-            <!-- pagination in code igniter
-    http://studioultimate.com/easy-pagination-and-sorting-in-codeigniter/
--->
+</body>
+</html>
