@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(BASEPATH.'external_libraries/password_compat/lib/password.php');
+
 class Welcome extends CI_Controller {
 
 	/**
@@ -39,9 +41,7 @@ class Welcome extends CI_Controller {
 
 	public function register()
 	{
-		echo "lol";
-		$email = $this->input->post('email');
-		print $email;
+
 	}
 
 }
