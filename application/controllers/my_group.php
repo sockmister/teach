@@ -12,6 +12,11 @@ class My_group extends CI_Controller {
 		define('ASSEST_URL', base_url().'teach/assets/');		
 	}
 
+	public function index(){
+		$data['activeTab'] = "groupT";
+		$this->load->view('header', $data);
+	}
+	
 	//view all groups that person has joined
 	public function view(){
 

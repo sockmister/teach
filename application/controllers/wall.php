@@ -12,6 +12,11 @@ class Wall extends CI_Controller {
 		define('ASSEST_URL', base_url().'teach/assets/');		
 	}
 
+	public function index(){
+		$data['activeTab'] = "wallT";
+		$this->load->view('header', $data);
+	}
+
 	//retrieve profile page of $person
 	public function view($person){
 	}
