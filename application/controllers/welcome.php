@@ -43,9 +43,25 @@ class Welcome extends CI_Controller {
 
 	public function register()
 	{
+		$email = $this->input->post('email');
+		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+		$name = $this->input->post('name');
 
+	    $query = "INSERT INTO user (Email, Password, Name) " . "VALUES (" .
+	        $this->db->escape($email) .
+	        "," .
+	        $this->db->escape($password) .
+	        "," .
+	        $this->db->escape($name) .
+	        ")";
+
+		if ($this->db->query($query)) {
+			echo "User creation successful.";
+		}
+		else {
+			echo "User creation failed.";
+		}
 	}
-
 }
 
 /* End of file welcome.php */
