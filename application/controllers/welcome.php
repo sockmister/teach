@@ -1,6 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(BASEPATH.'external_libraries/password_compat/lib/password.php');
+if (PHP_VERSION_ID  < 50500) {
+	require_once(BASEPATH.'external_libraries/password_compat/lib/password.php');
+}
 
 class Welcome extends CI_Controller {
 
