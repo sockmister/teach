@@ -1,0 +1,3 @@
+[submodule "password_compat"]
+		path = system/external_libraries/password_compat
+		url = https://github.com/ircmaxell/password_compat.git
