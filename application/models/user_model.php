@@ -6,8 +6,23 @@ class User_model extends CI_Model {
         parent::__construct();
     }
 
-    function create_user($user){
-
+    function create_user($email, $password, $name) {
+        $query = "INSERT INTO users (Email, Password, Name) " . "VALUES (" .
+            $this->db->escape($email) .
+            "," .
+            $this->db->escape($password) .
+            "," .
+            $this->db->escape($name) .
+            ")";
+        
+        if ($this->db->query($query)) {
+            // User creation successful
+            return true;
+        }
+        else {
+            // User creation failed
+            return false;
+        }
     }
 
     function retrieve_user($user){

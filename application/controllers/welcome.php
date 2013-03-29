@@ -44,23 +44,17 @@ class Welcome extends CI_Controller {
 
 	public function register()
 	{
-		// TODO: This needs to be moved to model.
 		$email = $this->input->post('email');
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$name = $this->input->post('name');
 
-	    $query = "INSERT INTO users (Email, Password, Name) " . "VALUES (" .
-	        $this->db->escape($email) .
-	        "," .
-	        $this->db->escape($password) .
-	        "," .
-	        $this->db->escape($name) .
-	        ")";
-
-		if ($this->db->query($query)) {
+		$result = $this->user_model->create_user($email, $password, $name);
+		if ($result) {
+			// User creation successful.
 			echo "User creation successful.";
 		}
 		else {
+			// User creation failed.
 			echo "User creation failed.";
 		}
 	}
