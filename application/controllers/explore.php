@@ -60,8 +60,14 @@ class Explore extends CI_Controller {
 	
 	//create a group
 	public function createGroup(){
-		$email = $this->input->post('groupName');
-		print $email;
+		$groupName = $this->input->post('groupName');
+		$description = $this->input->post('description');
+
+		$group = array($groupName,$description);
+
+		$this->load->model('Group_model');
+		$this->Group_model->create_group($group);
+
 	}
 
 	//join a group
