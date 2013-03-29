@@ -61,8 +61,8 @@ class Welcome extends CI_Controller {
 
 	public function login()
 	{
-		$username = $this->input->post('email');
-		$password = $this->input->post('password');
+		$username = $this->input->post('login_email');
+		$password = $this->input->post('login_password');
 		
 		$result = $this->user_model->login($username, $password);
 
