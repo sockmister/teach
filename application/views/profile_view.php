@@ -1,6 +1,6 @@
         <div class="span8 center">
-            <h1><?php echo $name; ?>  <a href="<?php echo site_url("my_group/leave/yoyo") ?>" class="btn btn-primary btn-small pull-right">Unfriend (or friend depending on status)</a></h1>
-            <hr>
+          <h1><?php echo $name; ?>  <a href="<?php echo site_url("my_group/leave/yoyo") ?>" class="btn btn-primary btn-small pull-right">Unfriend (or friend depending on status)</a></h1>
+          <hr>
           <div class="row">
             <div class="span4"> 
 
@@ -9,13 +9,27 @@
               <p><b>Gender: </b><?php echo $gender;?></p>
               <p><b>Handphone: </b><?php echo $phone;?></p>
               <p><b>Address: </b><?php echo $address;?></p>
+              <p><b> Groups Joined: </b> <br><a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
+                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a>
+                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
+                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
+                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a>
+                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
+              </p>
+              <p><b> Friends: </b>  <br>          
+                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+              </p>
             </div>
             <div class="span4 text-right">
               <span class="btn btn-file "><img data-src="holder.js/200x150" alt=""></span>
             </div>
           </div>
           <hr>
-                    <form method="post" action="<?php echo site_url('wall/postComment'); ?>" id="comment-create">
+          <form method="post" action="<?php echo site_url('wall/postComment'); ?>" id="comment-create">
             <fieldset>
               <label></label>
               <textarea rows="3" class="span8" name="comment">New Comments</textarea>
