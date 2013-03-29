@@ -1,31 +1,27 @@
         <div class="span8 center">
-          <h1><?php echo $name; ?>  <a href="<?php echo site_url("my_group/leave/yoyo") ?>" class="btn btn-primary btn-small pull-right">Unfriend (or friend depending on status)</a></h1>
+          <h1><?php echo $user[0]->Name; ?>  <a href=<?php echo $friend_status[0] ?> class="btn btn-primary btn-small pull-right"><?php echo $friend_status[1] ?></a></h1>
           <hr>
           <div class="row">
             <div class="span4"> 
 
-              <p><b>Email: </b><?php echo $email; ?></p>
-              <p><b>Date of Birth: </b><?php echo $dob;?></p>
-              <p><b>Gender: </b><?php echo $gender;?></p>
-              <p><b>Handphone: </b><?php echo $phone;?></p>
-              <p><b>Address: </b><?php echo $address;?></p>
-              <p><b> Groups Joined: </b> <br><a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
-                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a>
-                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
-                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
-                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a>
-                <a href="<?php echo site_url("/my_group/view/fishing") ?>"><span class="label" >Fishing</span></a> 
+              <p><b>Email: </b><?php echo $user[0]->Email; ?></p>
+              <p><b>Date of Birth: </b><?php echo $user[0]->Birthday;?></p>
+              <p><b>Gender: </b><?php echo $user[0]->Gender;?></p>
+              <p><b>Handphone: </b><?php echo $user[0]->Contact_number;?></p>
+              <p><b>Address: </b>remove???</p>
+              <p><b> Groups Joined: </b> <br>
+                <?php foreach ($groups as $curr_grp): ?>
+                <a href="<?php echo site_url("/my_group/view/" . base64_encode($curr_grp->skill)) ?>"><span class="label" ><?php echo $curr_grp->skill ?></span></a> 
+                <?php endforeach;?>
               </p>
-              <p><b> Friends: </b>  <br>          
-                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-                <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+              <p><b> Friends: </b>  <br>
+                <?php foreach ($friends as $curr_frn): ?>
+                <a href="<?php echo site_url("/wall/view/" . base64_encode($curr_frn->Email)) ?>"><span class="label" ><?php echo $curr_frn->Name ?></span></a> 
+                <?php endforeach;?>
               </p>
             </div>
             <div class="span4 text-right">
-              <span class="btn btn-file "><img data-src="holder.js/200x150" alt=""></span>
+              <span class="btn btn-file "><img data-src=<?php echo $user[0]->Photo ?> alt=""></span>
             </div>
           </div>
           <hr>
@@ -39,10 +35,9 @@
           </form>
           <hr>
           <h4><u>Past Comments</u> </h4>
-          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
-          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
-          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
-          <p>Motsu is a good teacher<br><span class="muted"><small>Posted on 21 Feb 2013 by</small></span> <span class="label label-inverse">Mark</span> </p>
+            <?php foreach ($comments as $curr_comm): ?>
+              <p><?php echo $curr_comm->Comment ?><br><span class="muted"><small>Posted on <?php echo $curr_comm->Created_on ?> by</small></span> <span class="label label-inverse"><?php echo $curr_comm->Name ?></span> </p>
+            <?php endforeach;?>
         </div>
 
 

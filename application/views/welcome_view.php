@@ -39,9 +39,9 @@ body {
               </ul>
 
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" placeholder="Email" type="text">
-              <input class="span2" placeholder="Password" type="password">
+            <form class="navbar-form pull-right" method="post" action="<?php echo site_url('welcome/login'); ?>" name="form-login" id="form-login">>
+              <input class="span2" placeholder="Email" type="text" name="login_email" id="login_email">
+              <input class="span2" placeholder="Password" type="password" name="login_password" id="login_password">
               <button type="submit" class="btn">Sign in</button>
             </form>
           </div><!--/.nav-collapse -->
