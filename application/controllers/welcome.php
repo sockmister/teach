@@ -27,6 +27,7 @@ class Welcome extends CI_Controller {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
+		$this->load->model('user_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');		
 	}
 
@@ -43,11 +44,12 @@ class Welcome extends CI_Controller {
 
 	public function register()
 	{
+		// TODO: This needs to be moved to model.
 		$email = $this->input->post('email');
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$name = $this->input->post('name');
 
-	    $query = "INSERT INTO user (Email, Password, Name) " . "VALUES (" .
+	    $query = "INSERT INTO users (Email, Password, Name) " . "VALUES (" .
 	        $this->db->escape($email) .
 	        "," .
 	        $this->db->escape($password) .
@@ -60,6 +62,21 @@ class Welcome extends CI_Controller {
 		}
 		else {
 			echo "User creation failed.";
+		}
+	}
+
+	public function login()
+	{
+		$username = $this->input->post('email');
+		$password = $this->input->post('password');
+		
+		$result = $this->user_model->login($username, $password);
+
+		if ($result) {
+			echo "Login successful.";
+		}
+		else {
+			echo "Login unsuccessful.";
 		}
 	}
 }
