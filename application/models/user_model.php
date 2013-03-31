@@ -25,8 +25,22 @@ class User_model extends CI_Model {
         }
     }
 
-    function retrieve_user($user){
+    function retrieve_user($username){
+        
+    }
 
+    function is_user($username) {
+        $query = "SELECT Email FROM users WHERE Email = " . 
+            $this->db->escape($username)
+            ;
+        $result = $this->db->query($query);
+        
+        if ($result->num_rows() == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     function update_user($user){
@@ -39,7 +53,7 @@ class User_model extends CI_Model {
 
     function login($username, $password)
     {
-        $query = "SELECT Password FROM users WHERE Email = " . 
+        $query = "SELECT Email, Password, Name FROM users WHERE Email = " . 
             $this->db->escape($username)
             ;
         $result = $this->db->query($query);
@@ -50,12 +64,24 @@ class User_model extends CI_Model {
             return false;
         }
         else {
-            // Begin verification
             #foreach ($result->result() as $row) {
             #    echo $row->Password;
             #}
             #echo $result->first_row()->Password;
-            return password_verify($password, $result->first_row()->Password);
+
+            // Begin verification. If login is successful, set up session data.
+            if (password_verify($password, $result->first_row()->Password)) {
+                $session_data = array(
+                    'email' => $result->first_row()->Email,
+                    'name' => $result->first_row()->Name,
+                    'logged_in' => true
+                    );
+                $this->session->set_userdata($session_data);
+                return true;
+            }
+            else {
+                return false;
+            }
         }
         #password_verify($password, $result);
 

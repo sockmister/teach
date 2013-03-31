@@ -46,11 +46,16 @@ class Welcome extends CI_Controller {
 
 	public function register()
 	{
+		// If user already exists in the database, do not allow registration.
+		$result = false;
 		$email = $this->input->post('email');
 		$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 		$name = $this->input->post('name');
+		
+		if (!$this->user_model->is_user($email)) {
+			$result = $this->user_model->create_user($email, $password, $name);
+		}
 
-		$result = $this->user_model->create_user($email, $password, $name);
 		if ($result) {
 			// User creation successful.
 			redirect('profile/index');
@@ -68,7 +73,6 @@ class Welcome extends CI_Controller {
 	{
 		$username = $this->input->post('login_email');
 		$password = $this->input->post('login_password');
-		
 		$result = $this->user_model->login($username, $password);
 
 		if ($result) {
