@@ -31,20 +31,24 @@ body {
       <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
           <div class="container">
-            <div class="nav-collapse collapse">
               <ul class="nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
-                
-              </ul>
+                 
+      
+             </ul>
 
-            </ul>
-            <form class="navbar-form pull-right" method="post" action="<?php echo site_url('welcome/login'); ?>" name="form-login" id="form-login">>
+            <form class="navbar-form pull-right" method="post" action="<?php echo site_url('welcome/login'); ?>" name="form-login" id="form-login">
+            <?php 
+              if ($loginFail == true)
+                echo "<span class=\"red\"> Login Failed </span>" ;
+            ?>
               <input class="span2" placeholder="Email" type="text" name="login_email" id="login_email">
               <input class="span2" placeholder="Password" type="password" name="login_password" id="login_password">
               <button type="submit" class="btn">Sign in</button>
             </form>
-          </div><!--/.nav-collapse -->
+        
+
         </div>
       </div>
     </div>
@@ -87,11 +91,11 @@ body {
                 <input class="span4" placeholder="Email" type="text" name="email" id="email"> 
               </div>
               <label>Password</label>
-              <div class="control-group" id="password-error">
+              <div class="control-group password-error">
                 <input class="span4 inputError"  type="password" value="Password" placeholder="Password" name="password" id="password">
 			  </div>
                <label>Confirm Password</label>             
-              <div class="control-group" id="password-error">             
+              <div class="control-group password-error">             
                 <input class="span4 inputError" placeholder="Type password again" type="password" value="" id="password-check" onkeyup="checkPass(); return false;">
 				<span id="confirmMessage" class ="confirmMessage"></span>
               </div>
@@ -100,7 +104,12 @@ body {
               <button type="submit" id="create-acct" class="btn">Create Account</button>
             </fieldset>
           </form>
-
+          
+          <?php 
+          if ($createFail == true)
+            echo "<div class=\"alert alert-error\"> Username has already been taken; </div>";
+          ?>
+        </div>
         </div>
       </div>
     </div>
@@ -128,7 +137,7 @@ body {
 
     $(document).ready(function(){
 
-      $("form").submit(function(){
+      $("form#form-signup").submit(function(){
         var hasError = false;
         var emailVal = $("#email").val();
         var passwordVal = $("#password").val();
@@ -136,7 +145,6 @@ body {
 
 
   if (!validateEmail(emailVal)){
-    alert("lol");
       $('#email-error-text').remove();
       $("#email-error").removeClass('success').addClass('error'); 
       $("#email").removeClass('inputSuccess').addClass("inputError").after('<span class="help-inline" id="email-error-text">Please enter a valid email!</span>');
@@ -147,14 +155,14 @@ body {
     {
       $('#email-error-text').remove();
       $("#email-error").removeClass('error').addClass('success'); 
-      $("#email").removeClass('inputError').addClass("inputSuccess").after('<span class="help-inline" id="email-error-text">Ok!</span>');
+      $("#email").removeClass('inputError').addClass("inputSuccess").after('');
 
     }
 
-	/*
+
      if (passwordVal != checkVal ) {
       $('#pass-error-text').remove();
-      $("#password-error").removeClass('success').addClass('error'); 
+      $(".password-error").removeClass('success').addClass('error'); 
       $("#password").removeClass('inputSuccess').addClass('inputError'); 
       $("#password-check").removeClass('inputSuccess').addClass("inputError").after('<span class="help-inline" id="pass-error-text">Password does not match!</span>');
       hasError = true;
@@ -163,12 +171,12 @@ body {
     else
     {
       $('#pass-error-text').remove();
-      $("#password-error").removeClass('error').addClass('success'); 
+      $(".password-error").removeClass('error').addClass('success'); 
       $("#password").removeClass('inputError').addClass('inputSuccess'); 
       $("#password-check").removeClass('inputError').addClass("inputSuccess").after('<span class="help-inline" id="pass-error-text">Ok!</span>');
 
     }
-	*/
+
 
     if(hasError == true) {return false;}
 
@@ -178,26 +186,6 @@ body {
 
 }); 
 
-// function to check password as user types
-function checkPass()
-{
-    
-    var pass1 = document.getElementById('password');
-    var pass2 = document.getElementById('password-check');
-    var message = document.getElementById('confirmMessage');
-    var goodColor = "#66cc66";
-    var badColor = "#ff6666";
-
-    if(pass1.value == pass2.value){
-        pass2.style.backgroundColor = goodColor;
-        message.style.color = goodColor;
-        message.innerHTML = "Passwords Match!"
-    }else{
-        pass2.style.backgroundColor = badColor;
-        message.style.color = badColor;
-        message.innerHTML = "Passwords Do Not Match!"
-    }
-}
 
 
 
