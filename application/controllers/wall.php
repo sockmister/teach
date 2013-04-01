@@ -37,6 +37,7 @@ class Wall extends CI_Controller {
 		$user = $this->session->userdata('email');
 		$person = base64_decode($person);
 		$data = $this->friend_model->retrieve_friend($user, $person);
+		$data['activeTab'] = "wallT";
 
 		$this->load->view('header', $data);
 		$this->load->view('profile_view');
@@ -44,8 +45,17 @@ class Wall extends CI_Controller {
 
 	public function postComment(){
 		$comment = $this->input->post('comment');
+		$person = $this->input->post('person');			//add this in commnet page
 		
 		$this->load->model("comment_model");
+		$user = $this->session->userdata('email');
+		$this->comment_model->create_comment($user, $person, $comment);		//implement this method
+
+		$data = $this->fried_model->retrieve_friend($user, $person);
+		$data['activeTab'] = "wallT";
+
+		$this->load->view('header', $data);
+		$tihs->load->view('profile_view');
 	}
 }
 ?>

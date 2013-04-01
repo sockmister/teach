@@ -31,6 +31,12 @@ class Friend extends CI_Controller {
 
 	}
 
+	//accept a friend request
+	public function accept_friend($person){
+
+	}
+
+	//behavior: set status as 0 -> request pending.
 	public function befriend($person){
 		$this->load->model('friend_model');
 
