@@ -11,13 +11,14 @@ class Friend extends CI_Controller {
 		$this->load->database();
 		//$this->db->query("PRAGMA foreign_keys = ON");
 		define('ASSEST_URL', base_url().'teach/assets/');
+		if($this->session->userdata('logged_in') != "true") {
+			redirect("/welcome/index");
+			return;
+		}	
 	}
 
 	public function index()
 	{
-
-		//hide data vy whether friends or not
-
 		$data['activeTab'] = 'friendsT';
 
 		$this->load->view('header', $data);
@@ -30,28 +31,32 @@ class Friend extends CI_Controller {
 
 	}
 
-	public function befriend($friend){
+	public function befriend($person){
 		$this->load->model('friend_model');
 
-		//get user_email from session
-		//assume $friend is email
-		//$this->friend_model->create_friend("john@email.com", "jane@email.com");
-		$user;		//->get user data
-		$friend = base64_decode($friend);
-		$this->friend_model->create_friend($user, $friend);
+		$user = $this->session->userdata('email');
+		$person = base64_decode($person);
+		$this->friend_model->create_friend($user, $person);
 
-		//what view to load
+		$data = $this->friend_model->retrieve_friend($user, $person);
+		$data['activeTab'] = "wallT";
+
+		$this->load->view('header', $data);
+		$this->load->view('profile_view');
 	}
 
 	public function unfriend($person){
 		$this->load->model('friend_model');
 
-		//$this->friend_model->delete_friend("john@email.com", "jane@email.com");
-		$user;
+		$user = $this->session->userdata('email');
 		$person = base64_decode($person);
 		$this->friend_model->delete_friend($user, $person);
 
-		//what view to load
+		$data = $this->friend_model->retrieve_friend($user, $person);
+		$data['activeTab'] = "wallT";
+
+		$this->load->view('header', $data);
+		$this->load->view('profile_view');
 	}
 
 }

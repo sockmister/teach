@@ -34,9 +34,10 @@ class Friend_model extends CI_Model {
                 FROM friend
                 WHERE Email_first = ? AND Email_second = ?";
 
-        $query = $this->db->query($sql, array($person, $friend));
+        if($person != $friend)
+            $query = $this->db->query($sql, array($person, $friend));
 
-        if(1){
+        if($person == $friend || $query->result()){
             //users: name,email,dob,gender,handphone, picture
             //belongs_to: groups_joined
             //friend: friends of
@@ -68,8 +69,13 @@ class Friend_model extends CI_Model {
             $query = $this->db->query($sql, array($to_view));
             $data['comments'] = $query->result();
 
-            $site = site_url("friend/unfriend/" . base64_encode($to_view));
-            $data['friend_status'] = Array($site, "Unfriend");
+            if($person != $friend){
+                $site = site_url("friend/unfriend/" . base64_encode($to_view));
+                $data['friend_status'] = Array($site, "Unfriend");
+            }   
+            else{
+                $data['friend_status'] = Array("", "Unfriend");
+            }
 
             return $data;
         }
@@ -85,7 +91,7 @@ class Friend_model extends CI_Model {
                     FROM belong_to bt
                     WHERE bt.user = ?";
             $query = $this->db->query($sql, array($to_view));
-            $data['friends'] = $query->result();
+            $data['groups'] = $query->result();
 
             $site = site_url("friend/befriend/" . base64_encode($to_view));
             $data['friend_status'] = Array($site, "Friend");

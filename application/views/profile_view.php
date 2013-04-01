@@ -1,19 +1,35 @@
         <div class="span8 center">
-          <h1><?php echo $user[0]->Name; ?>  <a href=<?php echo $friend_status[0] ?> class="btn btn-primary btn-small pull-right"><?php echo $friend_status[1] ?></a></h1>
+
+          
+          <h1><?php echo $user[0]->Name; ?> 
+            <?php if($friend_status[0] == "") { ?>
+            <?php } else { ?>
+           <a href=<?php echo $friend_status[0] ?> class="btn btn-primary btn-small pull-right"><?php echo $friend_status[1] ?></a>
+          <?php } ?></h1>
           <hr>
           <div class="row">
             <div class="span4"> 
 
+              <?php 
+                if(strcmp($friend_status[1],'Unfriend') == 0) {?>
               <p><b>Email: </b><?php echo $user[0]->Email; ?></p>
               <p><b>Date of Birth: </b><?php echo $user[0]->Birthday;?></p>
               <p><b>Gender: </b><?php echo $user[0]->Gender;?></p>
               <p><b>Handphone: </b><?php echo $user[0]->Contact_number;?></p>
               <p><b>Address: </b>remove???</p>
+              <?php
+              } else { ?>
+                <p><b>Gender: </b><?php echo $user[0]->Gender;?></p>
+              <?php }?>
+
               <p><b> Groups Joined: </b> <br>
                 <?php foreach ($groups as $curr_grp): ?>
                 <a href="<?php echo site_url("/my_group/view/" . base64_encode($curr_grp->skill)) ?>"><span class="label" ><?php echo $curr_grp->skill ?></span></a> 
                 <?php endforeach;?>
               </p>
+
+              <?php 
+                if(strcmp($friend_status[1],'Unfriend') == 0) {?>
               <p><b> Friends: </b>  <br>
                 <?php foreach ($friends as $curr_frn): ?>
                 <a href="<?php echo site_url("/wall/view/" . base64_encode($curr_frn->Email)) ?>"><span class="label" ><?php echo $curr_frn->Name ?></span></a> 
@@ -38,6 +54,8 @@
             <?php foreach ($comments as $curr_comm): ?>
               <p><?php echo $curr_comm->Comment ?><br><span class="muted"><small>Posted on <?php echo $curr_comm->Created_on ?> by</small></span> <span class="label label-inverse"><?php echo $curr_comm->Name ?></span> </p>
             <?php endforeach;?>
+
+            <?php } ?>
         </div>
 
 
