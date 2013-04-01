@@ -16,9 +16,12 @@
              <div class="span3">
 <label>Sort By</label>
     <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-<button type="button" class="btn vertical-button-fixed">Popularity</button>
-<button type="button" class="btn vertical-button-fixed">Date Created</button>
-<button type="button" class="btn vertical-button-fixed">Alphabetical</button>
+<a href="<?php echo site_url("explore/view_all/Popularity") ?>" class="btn vertical-button-fixed">Popularity</a></h3>       
+<!--<button type="button" class="btn vertical-button-fixed">Popularity</button>-->
+<a href="<?php echo site_url("explore/view_all/DateCreated") ?>" class="btn vertical-button-fixed">Date Created</a></h3>    
+<!--<button type="button" class="btn vertical-button-fixed">Date Created</button>-->
+<a href="<?php echo site_url("explore/view_all/Alphabetical") ?>" class="btn vertical-button-fixed">Alphabetical</a></h3> 
+<!--<button type="button" class="btn vertical-button-fixed">Alphabetical</button>-->
 <form method="post" action="<?php echo site_url('explore/createGroup'); ?>" id="group-create">
   <fieldset>
     <legend>Start your own Group</legend>
