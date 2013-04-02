@@ -63,19 +63,29 @@ class Welcome extends CI_Controller {
 		}
 	}
 
-	public function login()
-	{
+	public function login_post() {
 		$username = $this->input->post('login_email');
 		$password = $this->input->post('login_password');
+		
+		$result = $this->login($username, $password);
+		if ($result) {
+			echo "success";
+		}
+		else {
+			echo "fail";
+		}
+	}
+
+	public function login($username, $password)
+	{
 		$result = $this->user_model->login($username, $password);
 
 		if ($result) {
-
-			echo"success";
+			return true;
 		}
 		else {
 			// Login failed.
-			echo "fail";
+			return false;
 		}
 	}
 }

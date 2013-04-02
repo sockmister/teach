@@ -201,7 +201,7 @@ body {
 
         $("#login-fail").remove(); 
         
-        $.post('<?php echo site_url('welcome/login'); ?>', { 'login_email': emailVal, 'login_password': passwordVal},
+        $.post('<?php echo site_url('welcome/login_post'); ?>', { 'login_email': emailVal, 'login_password': passwordVal},
           function(result) {
                           if (result=="fail") {
                             $(".navbar-inner").after('<div class="alert alert-error pull-right" id="login-fail"> Wrong username or password! </div>');
