@@ -135,6 +135,7 @@ body {
         var hasError = false;
         var emailVal = $("#email").val();
         var passwordVal = $("#password").val();
+        var nameVal = $("#name").val();
         var checkVal = $("#password-check").val();
         $('#email-error-text').remove();
         $('#pass-error-text').remove();
@@ -171,7 +172,7 @@ body {
 
         if(hasError == false){
 
-          $.post('<?php echo site_url('welcome/register'); ?>', { 'email': emailVal, 'password': passwordVal, 'name':name },
+          $.post('<?php echo site_url('welcome/register'); ?>', { 'email': emailVal, 'password': passwordVal, 'name':nameVal },
             function(result) {
                   // clear any message that may have already been written
 
