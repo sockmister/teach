@@ -55,6 +55,8 @@ class Welcome extends CI_Controller {
 		}
 
 		if ($result) {
+			// Try to login for the user so that session data is properly set.
+			$result2 = $this->login($email, $this->input->post('password'));
 			echo "success";
 		}
 		else {
