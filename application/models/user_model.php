@@ -25,8 +25,29 @@ class User_model extends CI_Model {
         }
     }
 
-    function retrieve_user($username){
+    function retrieve_user($username) {
         
+    }
+
+    function retrieve_user_details($username) {
+        $query = "SELECT Email,Name,Birthday,Gender,Contact_number,Photo FROM users WHERE Email = " . 
+            $this->db->escape($username)
+            ;
+        $result = $this->db->query($query);
+        if ($result->num_rows() == 1) {
+            $userdata = array(
+                'email' => $result->first_row()->Email,
+                'name' => $result->first_row()->Name,
+                'birthday' => $result->first_row()->Birthday,
+                'gender' => $result->first_row()->Gender,
+                'contact_number' => $result->first_row()->Contact_number,
+                'photo' => $result->first_row()->Photo
+                );
+            return $userdata;
+        }
+        else {
+            return NULL;
+        }
     }
 
     function is_user($username) {

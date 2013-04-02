@@ -9,6 +9,7 @@ class Profile extends Authentication {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
+		$this->load->model('user_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');
 
 		// If user is not logged on, redirect to login.
@@ -17,17 +18,17 @@ class Profile extends Authentication {
 
 	public function index()
 	{
+		$userdata = $this->user_model->retrieve_user_details($this->get_logged_in_username());
 		$data['activeTab'] = 'profileT';
 
-		// to be filled in by sql queries
-		$data['email'] = 'lol@gmail.com';
-		$data['name'] = 'Motsu';
-		$data['phone'] = '999';
+		$data['email'] = $userdata['email'];
+		$data['name'] = $userdata['name'];
+		$data['phone'] = $userdata['contact_number'];
 		$data['address'] = 'changi';
 		$data['description'] = 'i rock';
-		$data['gender'] = 'm';
-		$data['dob'] = "02/16/12";
-		$data['pic'] = "i dont know how";
+		$data['gender'] = $userdata['gender'];
+		$data['dob'] = $userdata['birthday'];
+		$data['pic'] = $userdata['photo'];
 
 		#$test = $this->session->userdata['last_activity'];
 		#echo $test;

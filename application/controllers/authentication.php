@@ -20,5 +20,13 @@ class Authentication extends CI_Controller {
 		}
 		return false;
 	}
+
+	public function get_logged_in_username() {
+		if ($this->is_user_logged_in())
+		{ 
+		    return $this->session->userdata('email');
+		}
+		return NULL;
+	}
 }
 ?>
