@@ -64,7 +64,7 @@ class Welcome extends CI_Controller {
 			echo "fail";
 		}
 	}
-
+  
 	public function login_post() {
 		$username = $this->input->post('login_email');
 		$password = $this->input->post('login_password');

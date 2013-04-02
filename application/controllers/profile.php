@@ -2,8 +2,8 @@
 /*
 Controller for profile page
 */
-
-class Profile extends CI_Controller {
+require(APPPATH.'controllers/authentication.php');
+class Profile extends Authentication {
 	public function __construct() {
 		parent::__construct();
 		// Your own constructor code
@@ -11,6 +11,10 @@ class Profile extends CI_Controller {
 		$this->load->database();
 		define('ASSEST_URL', base_url().'teach/assets/');		
 	}
+
+    public function is_user_logged_on($username) {
+        
+    }
 
 	public function index()
 	{
