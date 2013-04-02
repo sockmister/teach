@@ -33,9 +33,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data['createFail'] = false;
-		$data['loginFail'] = false;
-		$this->load->view('welcome_view', $data);
+		$this->load->view('welcome_view');
 	}
 
 	public function count()
@@ -57,15 +55,11 @@ class Welcome extends CI_Controller {
 		}
 
 		if ($result) {
-			// User creation successful.
-			redirect('profile/index');
+			echo "success";
 		}
 		else {
 			// User creation failed.
-			$data['createFail'] = true;
-			$data['loginFail'] = false;
-			$this->load->view('welcome_view', $data);
-			$data['createFail'] = false;
+			echo "fail";
 		}
 	}
 
@@ -76,13 +70,12 @@ class Welcome extends CI_Controller {
 		$result = $this->user_model->login($username, $password);
 
 		if ($result) {
-			redirect('/wall/index/' .base64_encode($username) , 'refresh');
+
+			echo"success";
 		}
 		else {
-			$data['createFail'] = false;
-			$data['loginFail'] = true;
-			$this->load->view('welcome_view', $data);
-			$data['loginFail'] = false;
+			// Login failed.
+			echo "fail";
 		}
 	}
 }

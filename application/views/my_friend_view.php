@@ -22,12 +22,14 @@
 
 </div>
             <div class="span6 offset1"> 
-              <h1> M </h1>
+              <h2> Pending Friends </h2>
+              <h3> M </h3>
               <hr>   
               <h4> <a href="<?php echo site_url("/wall/index") ?>"> Motsu </a>
-            <a href="<?php echo site_url("my_group/friend/unfriend/Motsu") ?>" class="btn btn-primary btn-mini pull-right">Unfriend</a> </h4> 
+            <a href="<?php echo site_url("my_group/friend/unfriend/Motsu") ?>" class="btn btn-warning btn-mini pull-right">Withdraw Request</a> </h4> 
               <hr>
-              <h1> Y </h1>
+              <h2> Friends </h2>
+              <h3> Y </h3>
               <hr>   
               <h4> Yuri 
             <a href="<?php echo site_url("my_group/friend/unfriend/Yuri") ?>" class="btn btn-primary btn-mini pull-right">Unfriend</a> </h4> 

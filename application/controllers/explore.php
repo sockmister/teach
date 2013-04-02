@@ -88,10 +88,10 @@ class Explore extends CI_Controller {
 
 		if ($result) {
 			//popup dialog to say group created
-			echo "Group created!";
+			echo "success";
 		}
 		else {
-			echo "Group already exist!";
+			echo "fail";
 		}
 
 	
@@ -108,14 +108,9 @@ class Explore extends CI_Controller {
 			. $this->db->escape($group) . ")";
 
 		if ($this->db->query($query)) {
-			echo "group joined!";
+			redirect("explore/index", 'refresh');
 		}
-		else {
-			echo "already joined before";
-		}
-	
-		
-		//echo $group;
+
 	}
 
 
