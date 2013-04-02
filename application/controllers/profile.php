@@ -9,12 +9,11 @@ class Profile extends Authentication {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
-		define('ASSEST_URL', base_url().'teach/assets/');		
-	}
+		define('ASSEST_URL', base_url().'teach/assets/');
 
-    public function is_user_logged_on($username) {
-        
-    }
+		// If user is not logged on, redirect to login.
+		$this->is_user_logged_in_else_redirect();
+	}
 
 	public function index()
 	{

@@ -14,7 +14,7 @@ class Authentication extends CI_Controller {
 	}
 
 	public function is_user_logged_in() {
-		if (!$this->session->userdata('logged_in'))
+		if ($this->session->userdata('logged_in'))
 		{ 
 		    return true;
 		}
