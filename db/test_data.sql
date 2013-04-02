@@ -22,16 +22,16 @@ INSERT INTO belong_to VALUES("john@gmail.com", "Burping");
 INSERT INTO belong_to VALUES("david@gmail.com", "Burping");
 INSERT INTO belong_to VALUES("may@gmail.com", "Burping");
 
-INSERT INTO friend VALUES("jane@gmail.com", "john@gmail.com", 0);
-INSERT INTO friend VALUES("may@gmail.com", "rachel@gmail.com", 1);
-INSERT INTO friend VALUES("john@gmail.com", "joshua@gmail.com", 0);
-INSERT INTO friend VALUES("peter@gmail.com", "rachel@gmail.com", 1);
-INSERT INTO friend VALUES("david@gmail.com", "may@gmail.com", 1);
-INSERT INTO friend VALUES("joshua@gmail.com", "peter@gmail.com", 0);
-INSERT INTO friend VALUES("joshua@gmail.com", "rachel@gmail.com", 1);
-INSERT INTO friend VALUES("jane@gmail.com", "rachel@gmail.com", 1);
-INSERT INTO friend VALUES("david@gmail.com", "john@gmail.com", 0);
-INSERT INTO friend VALUES("david@gmail.com", "peter@gmail.com", 0);
+INSERT INTO friend VALUES("jane@gmail.com", "john@gmail.com", "accepted");
+INSERT INTO friend VALUES("may@gmail.com", "rachel@gmail.com", "may@gmail.com");
+INSERT INTO friend VALUES("john@gmail.com", "joshua@gmail.com", "joshua@gmail.com");
+INSERT INTO friend VALUES("peter@gmail.com", "rachel@gmail.com", "accepted");
+INSERT INTO friend VALUES("david@gmail.com", "may@gmail.com", "accepted");
+INSERT INTO friend VALUES("joshua@gmail.com", "peter@gmail.com", "joshua@gmail.com");
+INSERT INTO friend VALUES("joshua@gmail.com", "rachel@gmail.com", "rachel@gmail.com");
+INSERT INTO friend VALUES("jane@gmail.com", "rachel@gmail.com", "accepted");
+INSERT INTO friend VALUES("david@gmail.com", "john@gmail.com", "accepted");
+INSERT INTO friend VALUES("david@gmail.com", "peter@gmail.com", "accepted");
 
 INSERT INTO comment VALUES("john@gmail.com", "jane@gmail.com", "nice hair", "2005-05-12");
 INSERT INTO comment VALUES("john@gmail.com", "peter@gmail.com", "wanna hang out?", "2006-05-12");

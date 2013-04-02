@@ -33,7 +33,17 @@ class Friend extends CI_Controller {
 
 	//accept a friend request
 	public function accept_friend($person){
+		$this->load->model('friend_model');
 
+		$user = $this->session->userdata('email');
+		$person = base64_decode($person);
+		$this->friend_model->update_friend($user, $person);
+
+		$data = $this->friend_model->retrieve_friend($user, $person);
+		$data['activeTab'] = "wallT";
+
+		$this->load->view('header', $data);
+		$this->load->view('profile_view');
 	}
 
 	//behavior: set status as 0 -> request pending.

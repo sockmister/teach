@@ -45,17 +45,18 @@ class Wall extends CI_Controller {
 
 	public function postComment(){
 		$comment = $this->input->post('comment');
-		$person = $this->input->post('person');			//add this in commnet page
+		$person = $this->input->post('person');			
+		$user = $this->session->userdata('email');
 		
 		$this->load->model("comment_model");
-		$user = $this->session->userdata('email');
-		$this->comment_model->create_comment($user, $person, $comment);		//implement this method
+		$this->comment_model->create_comment($user, $person, $comment);
 
-		$data = $this->fried_model->retrieve_friend($user, $person);
+		$this->load->model("friend_model");
+		$data = $this->friend_model->retrieve_friend($user, $person);
 		$data['activeTab'] = "wallT";
 
 		$this->load->view('header', $data);
-		$tihs->load->view('profile_view');
+		$this->load->view('profile_view');
 	}
 }
 ?>
