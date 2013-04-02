@@ -26,6 +26,8 @@ class Profile extends CI_Controller {
 		$data['dob'] = "02/16/12";
 		$data['pic'] = "i dont know how";
 
+		#$test = $this->session->userdata['last_activity'];
+		#echo $test;
 		$this->load->view('header', $data);
 		$this->load->view('profile_edit');
 	}
