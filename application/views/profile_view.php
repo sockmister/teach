@@ -46,7 +46,7 @@
               <label></label>
               <textarea rows="3" class="span8" name="comment">New Comments</textarea>
             </fieldset>
-
+            <input type="hidden" name="person" value=<?php echo $user[0]->Email ?> />
             <button type="submit" class="btn">Post</button>
           </form>
           <hr>
