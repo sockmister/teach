@@ -16,7 +16,7 @@ class Friend_model extends CI_Model {
         }
 
         $sql = "INSERT INTO friend
-                VALUES (?, ?)";
+                VALUES (?, ?, 0)";
 
         $query = $this->db->query($sql, array($person, $friend));
     }
@@ -30,13 +30,23 @@ class Friend_model extends CI_Model {
             $friend = $temp;
         }
 
-        $sql = "SELECT * 
-                FROM friend
+        $sql = "SELECT f.status
+                FROM friend f
                 WHERE Email_first = ? AND Email_second = ?";
 
-        $query = $this->db->query($sql, array($person, $friend));
+        if($person != $friend){
+            $query = $this->db->query($sql, array($person, $friend));
+            $status = $query->result();
+            if($status)
+                $status = $status[0]->Status;
+            else
+                $status = -1;
+        }
+        else{
+            $status = -1;
+        }
 
-        if(1){
+        if($person == $friend || $status == 1){
             //users: name,email,dob,gender,handphone, picture
             //belongs_to: groups_joined
             //friend: friends of
@@ -56,8 +66,8 @@ class Friend_model extends CI_Model {
 
             $sql = "SELECT u.Name, u.Email
                     FROM friend f, users u
-                    WHERE (f.Email_first = u.Email AND f.Email_second = ?) 
-                        OR (f.Email_second = u.Email AND f.Email_first = ?)";
+                    WHERE (f.Email_first = u.Email AND f.Email_second = ? AND f.status = 1) 
+                        OR (f.Email_second = u.Email AND f.Email_first = ? AND f.status =1)";
             $query = $this->db->query($sql, array($to_view, $to_view));
             $data['friends'] = $query->result();
 
@@ -68,8 +78,14 @@ class Friend_model extends CI_Model {
             $query = $this->db->query($sql, array($to_view));
             $data['comments'] = $query->result();
 
-            $site = site_url("friend/unfriend/" . base64_encode($to_view));
-            $data['friend_status'] = Array($site, "Unfriend");
+            if($person != $friend){
+
+                $site = site_url("friend/unfriend/" . base64_encode($to_view));
+                $data['friend_status'] = Array($site, "Unfriend");
+            }   
+            else{
+                $data['friend_status'] = Array("", "Unfriend");
+            }
 
             return $data;
         }
@@ -85,10 +101,16 @@ class Friend_model extends CI_Model {
                     FROM belong_to bt
                     WHERE bt.user = ?";
             $query = $this->db->query($sql, array($to_view));
-            $data['friends'] = $query->result();
+            $data['groups'] = $query->result();
 
-            $site = site_url("friend/befriend/" . base64_encode($to_view));
-            $data['friend_status'] = Array($site, "Friend");
+            if($status == -1){
+                $site = site_url("friend/befriend/" . base64_encode($to_view));
+                $data['friend_status'] = Array($site, "Friend");
+            }
+            else{
+                $site = site_url("wall/view/" . base64_encode($to_view));
+                $data['friend_status'] = Array($site, "Request sent");
+            }
 
             return $data;
         }
