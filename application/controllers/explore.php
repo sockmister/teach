@@ -50,29 +50,48 @@ class Explore extends CI_Controller {
 */
 
 		$this->load->view('header.php', $data);
-		$this->load->view('explore_view.php');
+
+		// by default order by name
+		$result = $this->group_model->explore_order_by_name();
+		$this->load->view('explore_view.php',$result);
 	}
 
 	//view all groups available
 	public function view_all($orderBy){
 		if (strcmp($orderBy,"Alphabetical") == 0) {
-			$result = $this->group_model->order_by_name();
-			print_r($result);
+			$result = $this->group_model->explore_order_by_name();
+			$data['activeTab'] = 'interestT';
+			$this->load->view('header.php', $data);
+			$this->load->view('explore_view.php',$result);
+			//print_r($result);
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
-			$result = $this->group_model->order_by_popularity();
-			print_r($result);
+			$result = $this->group_model->explore_order_by_popularity();
+			$data['activeTab'] = 'interestT';
+			$this->load->view('header.php', $data);
+			$this->load->view('explore_view.php',$result);
+			//print_r($result);
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
-			$result = $this->group_model->order_by_date_created();
-			print_r($result);
+			$result = $this->group_model->explore_order_by_date_created();
+			$data['activeTab'] = 'interestT';
+			$this->load->view('header.php', $data);
+			$this->load->view('explore_view.php',$result);
+			//print_r($result);
 		}
 		else {
-			echo "Failed comparison";
+			echo "fail";
 		}
 		
 	}
 
+	// view individual group details
+	public function view_group ($group) {
+		$data['activeTab'] = "";
+		$data['group'] = $group;
+		$this->load->view('header', $data);
+		$this->load->view('group_view');
+	}
 	
 	//create a group
 	public function createGroup(){
@@ -103,12 +122,17 @@ class Explore extends CI_Controller {
 	//join a group
 	public function join($group){
 		//$skill = base64_encode($group);
-		$query = "INSERT INTO belong_to (user,skill) VALUES  ('"
-			. $this->session->userdata('email'). "',"
-			. $this->db->escape($group) . ")";
+		$result = false;
 
-		if ($this->db->query($query)) {
+		if ($this->group_model->join_group($group)) {
+			$result = true;
+		}
+
+		if ($result) {
 			redirect("explore/index", 'refresh');
+		}
+		else {
+			echo "fail";
 		}
 
 	}

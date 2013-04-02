@@ -16,9 +16,12 @@
              <div class="span3">
 <label>Sort By</label>
     <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-<button type="button" class="btn vertical-button-fixed">Popularity</button>
+<!--<button type="button" class="btn vertical-button-fixed">Popularity</button>
 <button type="button" class="btn vertical-button-fixed">Date Created</button>
-<button type="button" class="btn vertical-button-fixed">Alphabetical</button>
+<button type="button" class="btn vertical-button-fixed">Alphabetical</button>-->
+    <a href="<?php echo site_url("my_group/view_order/Popularity") ?>" class="btn vertical-button-fixed">Popularity</a></h3>
+    <a href="<?php echo site_url("my_group/view_order/DateCreated") ?>" class="btn vertical-button-fixed">Date Created</a></h3>
+    <a href="<?php echo site_url("my_group/view_order/Alphabetical") ?>" class="btn vertical-button-fixed">Alphabetical</a></h3>  
     </div>
 
 </div>
@@ -26,7 +29,7 @@
               <h1> F </h1>
               <hr>   
               <h3> YoYo <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-              <a href="<?php echo site_url("my_group/leave/yoyo") ?>" class="btn btn-primary btn-small pull-right">Leave</a></h3> 
+              <a href="<?php echo site_url("my_group/leave/Fishing") ?>" class="btn btn-primary btn-small pull-right">Leave</a></h3> 
 
               <p> Fishing is interesting because we can learn ... </p>
               <hr>
@@ -35,7 +38,7 @@
 
 
               <h3>Card Magic <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-                <a href="<?php echo site_url("my_group/leave/Card Magic") ?>" class="btn btn-primary btn-small pull-right">Leave</a> </h3> 
+                <a href="<?php echo site_url("my_group/leave/Juggling") ?>" class="btn btn-primary btn-small pull-right">Leave</a> </h3> 
 
               <p> Fishing is interesting because we can learn ... </p>
               <hr>
