@@ -70,7 +70,7 @@ class My_group extends CI_Controller {
 		}
 
 		if ($result) {
-			redirect("explore/index", 'refresh');
+			redirect("my_group/index", 'refresh');
 		}
 		else {
 			echo "fail";
