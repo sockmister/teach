@@ -14,12 +14,12 @@ class My_group extends CI_Controller {
 	}
 
 	public function index(){
+		$user = $this->session->userdata('email');
+		$this->load->model('group_model');
+		$data = $this->group_model->retrieve_all_groups($user);
 		$data['activeTab'] = "groupT";
 		$this->load->view('header', $data);
-
-		// by default order by name
-		$result = $this->group_model->my_group_order_by_name();
-		$this->load->view('my_group_view', $result);
+		$this->load->view('my_group_view');
 	}
 	
 	//view groups that person has joined
@@ -52,15 +52,17 @@ class My_group extends CI_Controller {
 
 	// view individual group details
 	public function view_group ($group) {
-		$data['activeTab'] = "";
+		$this->load->model('group_model');
+		$data = $this->group_model->retrieve_group($group);
 		$data['group'] = $group;
+		$data['activeTab'] = "";
 		$this->load->view('header', $data);
 		$this->load->view('group_view');
 	}
 
 	
 	public function leave($group){
-		
+		$group = base64_decode($group);
 		$result = false;
 
 		if ($this->group_model->leave_group($group)) {

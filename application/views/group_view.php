@@ -1,18 +1,17 @@
         <div class="span8 center">
-            <h1><?php echo $group?> <a href="#" class="btn btn-primary btn-small pull-right">Join (or Leave depending on status)</a></h1>
+            <h1><?php echo base64_decode($group)?> <a href="#" class="btn btn-primary btn-small pull-right">Join (or Leave depending on status)</a></h1>
             <hr>
 
 
-              <p><b>Members: </b><? 1000?></p>
-              <p><b>Description: </b> Fishing is .....</p>
+              <p><b>Members: </b><?php echo $members[0]->Count?></p>
+
+              <p><b>Description: </b><?php echo $skill[0]->Description?></p>
               <hr>
 
-          <h3>Members in group</h3>
-          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
-          <a href="<?php echo site_url("/wall/index") ?>"><span class="label label-inverse" >Motsu</span></a> 
+         <h3>Members in group</h3>
+          <?php foreach ($members_in_group as $curr_mem): ?>
+          <a href="<?php echo site_url("/wall/view/" . base64_encode($curr_mem->user)) ?>"><span class="label label-inverse" ><?php echo $curr_mem->Name ?></span></a> 
+          <?php endforeach; ?>
       <hr>
            <form method="post" action="<?php echo site_url('group/postComment'); ?>" id="comment-create">
             <fieldset>

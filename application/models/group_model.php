@@ -24,7 +24,40 @@ class Group_model extends CI_Model {
     }
 
     function retrieve_group($group){
+        $group = base64_decode($group); 
 
+        //Get Skill data
+        $sql = "SELECT * FROM skill
+                WHERE Name = ?";
+        $query = $this->db->query($sql, array($group));
+        $data['skill'] = $query->result();
+
+        //Get Skill member count
+        $sql = "SELECT COUNT(*) AS Count
+                FROM belong_to b
+                WHERE  b.skill = ?";
+        $query = $this->db->query($sql, array($group));
+        $data['members'] = $query->result();
+
+        //Get Skill member names
+        $sql = "SELECT b.user, u.Name
+                FROM belong_to b, users u
+                WHERE b.skill = ? AND b.user = u.Email";
+        $query = $this->db->query($sql, array($group));
+        $data['members_in_group'] = $query->result();
+
+        return $data;
+    }
+
+    function retrieve_all_groups($user){
+        $sql = "SELECT s.Name, s.Created_on, s.Description
+                FROM skill s, belong_to b
+                WHERE b.user = '" . $user . "' AND b.skill = s.Name
+                ORDER BY s.Name";
+        $query = $this->db->query($sql);
+        $data['all_groups'] = $query->result();
+
+        return $data;
     }
 
     function update_group($group){

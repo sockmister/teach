@@ -26,22 +26,17 @@
 
 </div>
             <div class="span6 offset1"> 
-              <h1> F </h1>
-              <hr>   
-              <h3> YoYo <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-              <a href="<?php echo site_url("my_group/leave/Fishing") ?>" class="btn btn-primary btn-small pull-right">Leave</a></h3> 
-
-              <p> Fishing is interesting because we can learn ... </p>
+               <hr>
+              <?php if (empty($all_groups)): ?>
+                <h2>You are not enrolled in a skill yet!</h2>
+              <?php endif; ?> 
+              
+              <?php foreach ($all_groups as $curr_group): ?>   
+              <a href="<?php echo site_url("my_group/view_group/" . base64_encode($curr_group->Name)) ?>"</a><h3><?php echo $curr_group->Name ?><h3><small>since <?php echo $curr_group->Created_on ?></small></h3>
+              <a href="<?php echo site_url("my_group/leave/" . base64_encode($curr_group->Name)) ?>" class="btn btn-primary btn-small pull-right">Leave</a></h3> 
+              <p><?php echo $curr_group->Description ?></p>
               <hr>
-              <h1> J </h1>
-              <hr>
-
-
-              <h3>Card Magic <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-                <a href="<?php echo site_url("my_group/leave/Juggling") ?>" class="btn btn-primary btn-small pull-right">Leave</a> </h3> 
-
-              <p> Fishing is interesting because we can learn ... </p>
-              <hr>
+              <?php endforeach; ?>
             </div>
           </div>
         </div>
