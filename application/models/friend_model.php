@@ -137,5 +137,38 @@ class Friend_model extends CI_Model {
 
         $query = $this->db->query($sql, array($person, $friend));
     }
+
+    //retrieve friend list and push friend request to top
+    function retrieve_friend_list($person){
+        $sql = "SELECT u.name as name, u.Email, f.status as status, 
+                    CASE f.Status
+                    WHEN ? THEN 'friend/withdraw_request'
+                    WHEN 'accepted' THEN 'friend/unfriend'
+                    ELSE 'friend/accept_friend'
+                    END as link,
+
+                    CASE f.Status
+                    WHEN ? THEN 'Withdraw Request'
+                    WHEN 'accepted' THEN 'Unfriend'
+                    ELSE 'Accept Request'
+                    END as button_name  
+
+                FROM users u, friend f
+                WHERE (f.Email_first = ? OR f.Email_second = ?) AND (u.Email <> ? AND (u.Email = f.Email_first OR u.Email = f.Email_second))
+                ORDER BY(
+                    CASE status
+                    WHEN ? THEN 2
+                    WHEN 'accepted' THEN 3
+                    ELSE 1
+                    END
+                ) ASC";
+                
+
+        $query = $this->db->query($sql, array($person, $person, $person, $person, $person, $person));
+
+        //print_r($query->result());
+
+        return $query->result();
+    }
 }
 ?>
