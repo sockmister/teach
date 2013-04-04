@@ -78,62 +78,62 @@ class Group_model extends CI_Model {
     // explore order by name
     function explore_order_by_name($user) {
 
-        $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
-            FROM belong_to b1, skill s 
-            WHERE s.name = b1.skill AND NOT EXISTS(
+        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+                FROM belong_to b1, skill s 
+                WHERE s.name = b1.skill AND NOT EXISTS(
                 SELECT b2.skill FROM belong_to b2 
                 WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
                 GROUP BY b1.skill, s.created_on, s.description 
                 ORDER BY b1.skill ASC ";
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
     // explore order by popularity
     function explore_order_by_popularity($user) {
 
-        $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
-        FROM belong_to b1, skill s 
-        WHERE s.name = b1.skill AND NOT EXISTS(
+        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+            FROM belong_to b1, skill s 
+            WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
             WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
             GROUP BY b1.skill, s.created_on, s.description 
             ORDER BY COUNT(*) DESC ";
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
     // explore order by date
     function explore_order_by_date_created($user) {
 
-        $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
-        FROM belong_to b1, skill s 
-        WHERE s.name = b1.skill AND NOT EXISTS(
+        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+            FROM belong_to b1, skill s 
+            WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
             WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
             GROUP BY b1.skill 
             ORDER BY s.created_on ASC ";
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
     // join a group
     function join_group($group,$user) {
 
-        $query = "INSERT INTO belong_to (user,skill) VALUES  ('"
+        $sql = "INSERT INTO belong_to (user,skill) VALUES  ('"
             . $user . "',"
             . $this->db->escape($group) . ")";
 
-        if ($this->db->query($query)) {
+        if ($this->db->query($sql)) {
             return true;
         }
         else {
@@ -152,7 +152,7 @@ class Group_model extends CI_Model {
     // my_group order by name
     function my_group_order_by_name($user) {
 
-        $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
@@ -160,41 +160,41 @@ class Group_model extends CI_Model {
             "' ORDER BY b.skill ASC";
 
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
      // my_group order by popularity
     function my_group_order_by_popularity($user) {
 
-        $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
             HAVING b.user = '" . $user .
             "' ORDER BY COUNT(*) ASC";
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
     // my_group order by date
     function my_group_order_by_date_created($user) {
 
-        $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
             HAVING b.user = '" . $user .
             "' ORDER BY s.created_on DESC";
 
-        $result  = $this->db->query($query);
+        $query  = $this->db->query($sql);
 
-        return $result;
+        return $query->result();
 
     }
 
