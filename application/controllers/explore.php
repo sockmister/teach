@@ -57,7 +57,8 @@ class Explore extends CI_Controller {
 		$data['activeTab'] = 'interestT';
 		
 		// by default order by name
-		$data['alphabetical'] = $this->group_model->explore_order_by_name($user);
+		$data['groups'] = $this->group_model->explore_order_by_name($user);
+		//print_r($data['groups']);
 		$this->load->view('header.php', $data);
 		$this->load->view('explore_view.php');
 	}
@@ -67,19 +68,19 @@ class Explore extends CI_Controller {
 		$user = $this->session->userdata('email');
 
 		if (strcmp($orderBy,"Alphabetical") == 0) {
-			$data['alphabetical'] = $this->group_model->explore_order_by_name($user);
+			$data['groups'] = $this->group_model->explore_order_by_name($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
-			$data['popularity'] = $this->group_model->explore_order_by_popularity($user);
+			$data['groups'] = $this->group_model->explore_order_by_popularity($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
-			$data['date'] = $this->group_model->explore_order_by_date_created($user);
+			$data['groups'] = $this->group_model->explore_order_by_date_created($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
@@ -119,7 +120,7 @@ class Explore extends CI_Controller {
 
 	//join a group
 	public function join($group){
-		//$skill = base64_encode($group);
+		$group = base64_decode($group);
 		$result = false;
 		$user = $this->session->userdata('email');
 		if ($this->group_model->join_group($group,$user)) {

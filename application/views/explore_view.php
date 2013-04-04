@@ -36,23 +36,19 @@
     </form>
   </div>
   <div class="span6 offset1"> 
+                  <?php if (empty($groups)): ?>
+                <h2>You have already joined all the groups!</h2>
+              <?php endif; ?> 
 
-      <h1> F </h1>
-      <hr>   
-      <h3> Fishing <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-        <a href="<?php echo site_url("explore/join/Fishing") ?>" class="btn btn-primary btn-small pull-right">Join</a></h3> 
-
-        <p> Fishing is interesting because we can learn ... </p>
-
-        <hr>
-        <h1> J </h1>
-
-         <hr>
-        <h3>Juggling <small> 1000 teachers, 1000 learners, 200 pairs since 13 May 2010</small> 
-          <a href="<?php echo site_url("explore/join/Juggling") ?>" class="btn btn-primary btn-small pull-right">Join</a> </h3> 
-
-          <p> Fishing is interesting because we can learn ... </p>
-
+<?php
+     foreach ($groups as $group){
+     ?> <hr>   
+      <h3> <a href="<?php echo site_url("my_group/view_group/".base64_encode($group->skill)) ?>"> <?php echo $group->skill ?> </a> <small> <?php echo $group->count ?> members since <?php echo $group->create_on ?> </small> </h3>
+      <a href="<?php echo site_url("explore/join/".base64_encode($group->skill)) ?>" class="btn btn-primary btn-small pull-right">Join</a></h3>
+      <p> <?php echo $group->description ?> </p>
+      <?php
+      }
+      ?>
 
       </div>
     </div>

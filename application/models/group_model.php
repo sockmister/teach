@@ -78,7 +78,7 @@ class Group_model extends CI_Model {
     // explore order by name
     function explore_order_by_name($user) {
 
-        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
                 FROM belong_to b1, skill s 
                 WHERE s.name = b1.skill AND NOT EXISTS(
                 SELECT b2.skill FROM belong_to b2 
@@ -95,7 +95,7 @@ class Group_model extends CI_Model {
     // explore order by popularity
     function explore_order_by_popularity($user) {
 
-        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
             FROM belong_to b1, skill s 
             WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
@@ -112,7 +112,7 @@ class Group_model extends CI_Model {
     // explore order by date
     function explore_order_by_date_created($user) {
 
-        $sql = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
             FROM belong_to b1, skill s 
             WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
@@ -152,12 +152,11 @@ class Group_model extends CI_Model {
     // my_group order by name
     function my_group_order_by_name($user) {
 
-        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
-            FROM belong_to b, skill s 
-            WHERE s.name = b.skill 
-            GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $user .
-            "' ORDER BY b.skill ASC";
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
+        FROM belong_to b1, skill s 
+        WHERE s.name = b1.skill AND 
+        EXISTS(SELECT b2.skill FROM belong_to b2 WHERE b2.user = '" . $user ."' AND b2.skill = b1.skill) 
+        GROUP BY b1.skill ORDER BY b1.skill ASC ";
 
 
         $query  = $this->db->query($sql);
@@ -169,12 +168,11 @@ class Group_model extends CI_Model {
      // my_group order by popularity
     function my_group_order_by_popularity($user) {
 
-        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
-            FROM belong_to b, skill s 
-            WHERE s.name = b.skill 
-            GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $user .
-            "' ORDER BY COUNT(*) ASC";
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
+        FROM belong_to b1, skill s 
+        WHERE s.name = b1.skill AND 
+        EXISTS(SELECT b2.skill FROM belong_to b2 WHERE b2.user = '" . $user ."' AND b2.skill = b1.skill) 
+        GROUP BY b1.skill ORDER BY COUNT(*) ASC ";
 
         $query  = $this->db->query($sql);
 
@@ -185,12 +183,11 @@ class Group_model extends CI_Model {
     // my_group order by date
     function my_group_order_by_date_created($user) {
 
-        $sql = "SELECT b.skill, COUNT(*), s.created_on, s.description 
-            FROM belong_to b, skill s 
-            WHERE s.name = b.skill 
-            GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $user .
-            "' ORDER BY s.created_on DESC";
+        $sql = "SELECT b1.skill AS skill, COUNT(*) AS count, s.created_on AS create_on, s.description AS description
+        FROM belong_to b1, skill s 
+        WHERE s.name = b1.skill AND 
+        EXISTS(SELECT b2.skill FROM belong_to b2 WHERE b2.user = '" . $user ."' AND b2.skill = b1.skill) 
+        GROUP BY b1.skill ORDER BY s.created_on ASC ";
 
         $query  = $this->db->query($sql);
 

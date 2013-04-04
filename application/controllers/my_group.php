@@ -20,7 +20,9 @@ class My_group extends CI_Controller {
 	public function index(){
 		$user = $this->session->userdata('email');
 		$this->load->model('group_model');
-		$data = $this->group_model->retrieve_all_groups($user);
+		$data['groups'] = $this->group_model->my_group_order_by_name($user);
+		//print_r($data['groups']);
+
 		$data['activeTab'] = "groupT";
 		$this->load->view('header', $data);
 		$this->load->view('my_group_view');
@@ -31,30 +33,29 @@ class My_group extends CI_Controller {
 		$user = $this->session->userdata('email');
 
 		if (strcmp($orderBy,"Alphabetical") == 0) {
-			$data['alphabetical'] = $this->group_model->my_group_order_by_name($user);
-			$data['activeTab'] = "groupT";
-			$this->load->view('header', $data);
-			$this->load->view('my_group_view');
+			$data['groups'] = $this->group_model->my_group_order_by_name($user);
+			$data['activeTab'] = 'groupT';
+			$this->load->view('header.php', $data);
+			$this->load->view('my_group_view.php');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
-			$data['popularity']= $this->group_model->my_group_order_by_popularity($user);
-			$data['activeTab'] = "groupT";
-			$this->load->view('header', $data);
-			$this->load->view('my_group_view');
-			//print_r($result);
+			$data['groups'] = $this->group_model->my_group_order_by_popularity($user);
+			$data['activeTab'] = 'groupT';
+			$this->load->view('header.php', $data);
+			$this->load->view('my_group_view.php');
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
-			$data['date'] = $this->group_model->my_group_order_by_date_created($user);
-			$data['activeTab'] = "groupT";
-			$this->load->view('header', $data);
-			$this->load->view('my_group_view');
-			//print_r($result);
+			$data['groups'] = $this->group_model->my_group_order_by_date_created($user);
+			$data['activeTab'] = 'groupT';
+			$this->load->view('header.php', $data);
+			$this->load->view('my_group_view.php');
 		}
 		else {
 			echo "fail";
-		}	
+		}
 
 	}
+
 
 	// view individual group details
 	public function view_group ($group) {

@@ -4,6 +4,8 @@
         <div class="container">
           <div class="row">
             <div class="span6 center"> 
+            <form method="post" action="/" name="form1" id="form-signup">
+              <fieldset>              
              <legend>Account Information</legend>
              <label><?php echo $email; ?></label>
              <p>youemail@gmail.com</p>
@@ -43,12 +45,11 @@
             </div>
           </p>
             <label>Handphone Number</label>
-            <input class="input-large" type="text" name="phone" value="<?php echo $phone; ?>" placeholder="HP number">
-            <label>Address</label>
-            <textarea class="span6" rows="3" name="address"><?php echo $address; ?></textarea>
-                        <label>Self Description</label>
-            <textarea class="span6" rows="3" name="description"><?php echo $description; ?></textarea>
-
+            <input class="input-large" type="text" name="phone" value="<?php echo $phone; ?>" placeholder="HP number"/>
+            <hr>
+            <button type="submit" class="btn" id="f">Update Info</button>
+          </fieldset>
+        </form>
            </div>
         </div>
       </div>

@@ -26,17 +26,21 @@
 
 </div>
             <div class="span6 offset1"> 
-               <hr>
-              <?php if (empty($all_groups)): ?>
-                <h2>You are not enrolled in a skill yet!</h2>
+               
+                  <?php if (empty($groups)): ?>
+                <h2>You have not joined any of the groups!</h2>
               <?php endif; ?> 
-              
-              <?php foreach ($all_groups as $curr_group): ?>   
-              <a href="<?php echo site_url("my_group/view_group/" . base64_encode($curr_group->Name)) ?>"</a><h3><?php echo $curr_group->Name ?><h3><small>since <?php echo $curr_group->Created_on ?></small></h3>
-              <a href="<?php echo site_url("my_group/leave/" . base64_encode($curr_group->Name)) ?>" class="btn btn-primary btn-small pull-right">Leave</a></h3> 
-              <p><?php echo $curr_group->Description ?></p>
-              <hr>
-              <?php endforeach; ?>
+
+          <?php
+               foreach ($groups as $group){
+               ?> <hr>   
+                <h3> <a href="<?php echo site_url("my_group/view_group/".base64_encode($group->skill)) ?>"> <?php echo $group->skill ?> </a> <small> <?php echo $group->count ?> members since <?php echo $group->create_on ?> </small> </h3>
+                <a href="<?php echo site_url("my_group/leave/".base64_encode($group->skill)) ?>" class="btn btn-danger btn-small pull-right">Leave</a></h3>
+                <p> <?php echo $group->description ?> </p>
+                <?php
+                }
+                ?>
+
             </div>
           </div>
         </div>
