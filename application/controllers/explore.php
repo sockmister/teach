@@ -112,7 +112,7 @@ class Explore extends CI_Controller {
 			echo "success";
 		}
 		else {
-			echo "Group already exist!";
+			echo "fail";
 		}
 
 	}
