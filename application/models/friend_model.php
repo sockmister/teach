@@ -133,9 +133,9 @@ class Friend_model extends CI_Model {
         }
 
         $sql = "DELETE FROM friend
-                WHERE Email_first = ? AND Email_second = ?";
+                WHERE (Email_first = ? AND Email_second = ?) OR (Email_first = ? AND Email_second = ?)";
 
-        $query = $this->db->query($sql, array($person, $friend));
+        $query = $this->db->query($sql, array($person, $friend, $friend, $person));
     }
 
     //retrieve friend list and push friend request to top
