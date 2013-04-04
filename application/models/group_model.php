@@ -8,14 +8,16 @@ class Group_model extends CI_Model {
 
     function create_group($group){
        
-        $query = "INSERT INTO skill (Name, Description, Created_on) VALUES (" 
+        $sql = "INSERT INTO skill (Name, Description, Created_on) VALUES (" 
             . $this->db->escape($group[0]) ."," 
             . $this->db->escape($group[1]) .","
             . $this->session->userdata('last_activity') .
             ")"; 
         
+        $query = $this->db->query($sql);
 
-        if ($this->db->query($query)) {
+
+        if ($this->db->affected_rows() > 0) {
             return true;
         }
         else {
@@ -72,30 +74,15 @@ class Group_model extends CI_Model {
 
     }
 
-    // check if a group exist
-    function is_group($groupName) {
-        $query = "SELECT Name FROM skill WHERE Name = " .
-            $this->db->escape($groupName);
-
-        $result = $this->db->query($query);
-
-        if ($result->num_rows == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
-
-    }
 
     // explore order by name
-    function explore_order_by_name() {
+    function explore_order_by_name($user) {
 
         $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
             FROM belong_to b1, skill s 
             WHERE s.name = b1.skill AND NOT EXISTS(
                 SELECT b2.skill FROM belong_to b2 
-                WHERE b2.user = '" . $this->session->userdata('email') . "' AND b2.skill = b1.skill) 
+                WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
                 GROUP BY b1.skill, s.created_on, s.description 
                 ORDER BY b1.skill ASC ";
 
@@ -106,13 +93,13 @@ class Group_model extends CI_Model {
     }
 
     // explore order by popularity
-    function explore_order_by_popularity() {
+    function explore_order_by_popularity($user) {
 
         $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
         FROM belong_to b1, skill s 
         WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
-            WHERE b2.user = '" . $this->session->userdata('email') . "' AND b2.skill = b1.skill) 
+            WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
             GROUP BY b1.skill, s.created_on, s.description 
             ORDER BY COUNT(*) DESC ";
 
@@ -122,15 +109,15 @@ class Group_model extends CI_Model {
 
     }
 
-    // explore order by popularity
-    function explore_order_by_date_created() {
+    // explore order by date
+    function explore_order_by_date_created($user) {
 
         $query = "SELECT b1.skill , COUNT(*), s.created_on, s.description 
         FROM belong_to b1, skill s 
         WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
-            WHERE b2.user = '" . $this->session->userdata('email') . "' AND b2.skill = b1.skill) 
-            GROUP BY b1.skill, s.created_on, s.description 
+            WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
+            GROUP BY b1.skill 
             ORDER BY s.created_on ASC ";
 
         $result  = $this->db->query($query);
@@ -140,10 +127,10 @@ class Group_model extends CI_Model {
     }
 
     // join a group
-    function join_group($group) {
+    function join_group($group,$user) {
 
         $query = "INSERT INTO belong_to (user,skill) VALUES  ('"
-            . $this->session->userdata('email'). "',"
+            . $user . "',"
             . $this->db->escape($group) . ")";
 
         if ($this->db->query($query)) {
@@ -163,13 +150,13 @@ class Group_model extends CI_Model {
     *******************************************************************************************************/
 
     // my_group order by name
-    function my_group_order_by_name() {
+    function my_group_order_by_name($user) {
 
         $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $this->session->userdata('email') .
+            HAVING b.user = '" . $user .
             "' ORDER BY b.skill ASC";
 
 
@@ -180,13 +167,13 @@ class Group_model extends CI_Model {
     }
 
      // my_group order by popularity
-    function my_group_order_by_popularity() {
+    function my_group_order_by_popularity($user) {
 
         $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $this->session->userdata('email') .
+            HAVING b.user = '" . $user .
             "' ORDER BY COUNT(*) ASC";
 
         $result  = $this->db->query($query);
@@ -195,14 +182,14 @@ class Group_model extends CI_Model {
 
     }
 
-    // my_group order by popularity
-    function my_group_order_by_date_created() {
+    // my_group order by date
+    function my_group_order_by_date_created($user) {
 
         $query = "SELECT b.skill, COUNT(*), s.created_on, s.description 
             FROM belong_to b, skill s 
             WHERE s.name = b.skill 
             GROUP BY b.skill, s.description, s.created_on 
-            HAVING b.user = '" . $this->session->userdata('email') .
+            HAVING b.user = '" . $user .
             "' ORDER BY s.created_on DESC";
 
         $result  = $this->db->query($query);
@@ -212,10 +199,10 @@ class Group_model extends CI_Model {
     }
 
     // leave a group
-    function leave_group($group) {
+    function leave_group($group,$user) {
 
         $query = "DELETE FROM belong_to 
-            WHERE user = '" . $this->session->userdata('email') .
+            WHERE user = '" . $user .
             "' AND skill = " . $this->db->escape($group);
 
         if ($this->db->query($query)) {

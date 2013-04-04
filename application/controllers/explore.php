@@ -10,12 +10,16 @@ class Explore extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('group_model','',TRUE);
-		define('ASSEST_URL', base_url().'teach/assets/');		
+		define('ASSEST_URL', base_url().'teach/assets/');	
+		if($this->session->userdata('logged_in') != "true") {
+			redirect("/welcome/index");
+			return;
+		}
 	}
 
 	public function index()
 	{
-		$data['activeTab'] = 'interestT';
+		
 
 		// refer to stall_owner.php in controller and collection_table.php in view
 		// should load the model and get all groups
@@ -47,37 +51,38 @@ class Explore extends CI_Controller {
 		<? } ?>
 
 	only need groups not joined by user on this page
-*/
-
-		$this->load->view('header.php', $data);
-
+	*/	
+		$user = $this->session->userdata('email');
+		$this->load->model('group_model');
+		$data['activeTab'] = 'interestT';
+		
 		// by default order by name
-		$result = $this->group_model->explore_order_by_name();
-		$this->load->view('explore_view.php',$result);
+		$data['alphabetical'] = $this->group_model->explore_order_by_name($user);
+		$this->load->view('header.php', $data);
+		$this->load->view('explore_view.php');
 	}
 
 	//view all groups available
 	public function view_all($orderBy){
+		$user = $this->session->userdata('email');
+
 		if (strcmp($orderBy,"Alphabetical") == 0) {
-			$result = $this->group_model->explore_order_by_name();
+			$data['alphabetical'] = $this->group_model->explore_order_by_name($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
-			$this->load->view('explore_view.php',$result);
-			//print_r($result);
+			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
-			$result = $this->group_model->explore_order_by_popularity();
+			$data['popularity'] = $this->group_model->explore_order_by_popularity($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
-			$this->load->view('explore_view.php',$result);
-			//print_r($result);
+			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
-			$result = $this->group_model->explore_order_by_date_created();
+			$data['date'] = $this->group_model->explore_order_by_date_created($user);
 			$data['activeTab'] = 'interestT';
 			$this->load->view('header.php', $data);
-			$this->load->view('explore_view.php',$result);
-			//print_r($result);
+			$this->load->view('explore_view.php');
 		}
 		else {
 			echo "fail";
@@ -92,7 +97,7 @@ class Explore extends CI_Controller {
 		$this->load->view('header', $data);
 		$this->load->view('group_view');
 	}
-	
+
 	//create a group
 	public function createGroup(){
 		$result = false;
@@ -100,22 +105,15 @@ class Explore extends CI_Controller {
 		$description = $this->input->post('description');
 		$group = array($groupName,$description);
 
-		if (!$this->group_model->is_group($groupName)){
-			$result = $this->group_model->create_group($group);
-		}
-		
+		$result = $this->group_model->create_group($group);
 
 		if ($result) {
 			//popup dialog to say group created
 			echo "success";
 		}
 		else {
-			echo "fail";
+			echo "Group already exist!";
 		}
-
-	
-		//$this->load->model('Group_model');
-		//$result = $this->Group_model->create_group($group);
 
 	}
 
@@ -123,8 +121,8 @@ class Explore extends CI_Controller {
 	public function join($group){
 		//$skill = base64_encode($group);
 		$result = false;
-
-		if ($this->group_model->join_group($group)) {
+		$user = $this->session->userdata('email');
+		if ($this->group_model->join_group($group,$user)) {
 			$result = true;
 		}
 

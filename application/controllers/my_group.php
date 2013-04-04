@@ -11,6 +11,10 @@ class My_group extends CI_Controller {
 		$this->load->database();
 		$this->load->model('group_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');		
+		if($this->session->userdata('logged_in') != "true") {
+			redirect("/welcome/index");
+			return;
+		}
 	}
 
 	public function index(){
@@ -24,21 +28,23 @@ class My_group extends CI_Controller {
 	
 	//view groups that person has joined
 	public function view_order($orderBy){
+		$user = $this->session->userdata('email');
+
 		if (strcmp($orderBy,"Alphabetical") == 0) {
-			$result = $this->group_model->my_group_order_by_name();
+			$data['alphabetical'] = $this->group_model->my_group_order_by_name($user);
 			$data['activeTab'] = "groupT";
 			$this->load->view('header', $data);
 			$this->load->view('my_group_view');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
-			$result = $this->group_model->my_group_order_by_popularity();
+			$data['popularity']= $this->group_model->my_group_order_by_popularity($user);
 			$data['activeTab'] = "groupT";
 			$this->load->view('header', $data);
 			$this->load->view('my_group_view');
 			//print_r($result);
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
-			$result = $this->group_model->my_group_order_by_date_created();
+			$data['date'] = $this->group_model->my_group_order_by_date_created($user);
 			$data['activeTab'] = "groupT";
 			$this->load->view('header', $data);
 			$this->load->view('my_group_view');
@@ -64,8 +70,9 @@ class My_group extends CI_Controller {
 	public function leave($group){
 		$group = base64_decode($group);
 		$result = false;
+		$user = $this->session->userdata('email');
 
-		if ($this->group_model->leave_group($group)) {
+		if ($this->group_model->leave_group($group,$user)) {
 			$result = true;
 		}
 
