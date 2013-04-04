@@ -23,11 +23,15 @@
 
             <div class="span6 offset1"> 
               <?php 
+                if(empty($friends))
+                  echo "<h2> You have no friends! </h2>";
+
                 $printed = 0;
                 $letter = "A";
                 $user = $this->session->userdata('email');
-                if($friends[0]->status != "accepted")
-                  echo "<h2> Pending Friends </h2><hr>";
+                if(!empty($friends))
+                  if($friends[0]->status != "accepted")
+                    echo "<h2> Pending Friends </h2><hr>";
 
                 foreach ($friends as $curr_friend):
                   $friend = $curr_friend->Email;
@@ -36,7 +40,7 @@
                     $printed = 1;
                     $letter = "A";
                   }
-                  else if(strtoupper($curr_friend->name[0]) != $letter){
+                  if(strtoupper($curr_friend->name[0]) != $letter){
                     $letter = strtoupper($curr_friend->name[0]);
                     echo "<h3> {$letter} </h3><hr>"; ?>
                     <h4> <a href="<?php echo site_url("/wall/view/" . base64_encode($curr_friend->Email)) ?>"> <?php echo $curr_friend->name ?></a>
