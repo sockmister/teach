@@ -105,11 +105,13 @@ class Explore extends CI_Controller {
 		$groupName = $this->input->post('groupName');
 		$description = $this->input->post('description');
 		$group = array($groupName,$description);
+		$user = $this->session->userdata('email');
 
 		$result = $this->group_model->create_group($group);
 
 		if ($result) {
 			//popup dialog to say group created
+			$this->group_model->join_group($groupName, $user);
 			echo "success";
 		}
 		else {

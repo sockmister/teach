@@ -24,7 +24,7 @@
 
               <p><b> Groups Joined: </b> <br>
                 <?php foreach ($groups as $curr_grp): ?>
-                <a href="<?php echo site_url("/my_group/view/" . base64_encode($curr_grp->skill)) ?>"><span class="label" ><?php echo $curr_grp->skill ?></span></a> 
+                <a href="<?php echo site_url("/my_group/view_group/" . base64_encode($curr_grp->skill)) ?>"><span class="label" ><?php echo $curr_grp->skill ?></span></a> 
                 <?php endforeach;?>
               </p>
 
