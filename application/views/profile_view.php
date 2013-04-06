@@ -3,8 +3,12 @@
           
           <h1><?php echo $user[0]->Name; ?> 
             <?php if($friend_status[0] == "") { ?>
-            <?php } else { ?>
-           <a href=<?php echo $friend_status[0] ?> class="btn btn-danger btn-small pull-right"><?php echo $friend_status[1] ?></a>
+            <?php } else {
+                      $button_tag = "btn-danger";
+                      if($friend_status[1] == "Friend")
+                        $button_tag = "btn-primary";
+             ?>
+           <a href=<?php echo $friend_status[0] ?> class="btn <?php echo $button_tag; ?>  btn-small pull-right"><?php echo $friend_status[1] ?></a>
           <?php } ?></h1>
           <hr>
           <div class="row">
