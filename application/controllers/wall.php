@@ -86,7 +86,7 @@ class Wall extends CI_Controller {
 		$data['activeTab'] = "wallT";
 
 		$this->load->view('header', $data);
-		$this->load->view('profile_view');
+		redirect('wall/view/'.base64_encode($person), 'refresh');
 	}
 }
 ?>

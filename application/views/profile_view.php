@@ -4,7 +4,7 @@
           <h1><?php echo $user[0]->Name; ?> 
             <?php if($friend_status[0] == "") { ?>
             <?php } else { ?>
-           <a href=<?php echo $friend_status[0] ?> class="btn btn-primary btn-small pull-right"><?php echo $friend_status[1] ?></a>
+           <a href=<?php echo $friend_status[0] ?> class="btn btn-danger btn-small pull-right"><?php echo $friend_status[1] ?></a>
           <?php } ?></h1>
           <hr>
           <div class="row">
@@ -16,7 +16,6 @@
               <p><b>Date of Birth: </b><?php echo $user[0]->Birthday;?></p>
               <p><b>Gender: </b><?php echo $user[0]->Gender;?></p>
               <p><b>Handphone: </b><?php echo $user[0]->Contact_number;?></p>
-              <p><b>Address: </b>remove???</p>
               <?php
               } else { ?>
                 <p><b>Gender: </b><?php echo $user[0]->Gender;?></p>
