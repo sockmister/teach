@@ -33,7 +33,20 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('welcome_view');
+		
+		$sql = "SELECT b1.skill AS skill
+            FROM belong_to b1, skill s 
+            WHERE s.name = b1.skill 
+            GROUP BY b1.skill
+            ORDER BY COUNT(*) DESC";
+
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0 ) {
+        	$result = $query->row(3);
+        }    
+
+		$data['groups'] = $result;
+		$this->load->view('welcome_view',$data);
 	}
 
 	public function count()
@@ -90,6 +103,7 @@ class Welcome extends CI_Controller {
 			return false;
 		}
 	}
+
 }
 
 /* End of file welcome.php */

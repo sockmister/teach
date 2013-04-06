@@ -43,7 +43,7 @@
 <?php
      foreach ($groups as $group){
      ?> <hr>   
-      <h3> <a href="<?php echo site_url("my_group/view_group/".base64_encode($group->skill)) ?>"> <?php echo $group->skill ?> </a> <small> <?php echo $group->count ?> members since <?php echo $group->create_on ?> </small> </h3>
+      <h3> <a href="<?php echo site_url("my_group/view_group/".base64_encode($group->skill)) ?>"> <?php echo $group->skill ?> </a> <small> <?php echo $group->count ?> members since <?php echo date("d M Y", $group->create_on) ?> </small> </h3>
       <a href="<?php echo site_url("explore/join/".base64_encode($group->skill)) ?>" class="btn btn-primary btn-small pull-right">Join</a></h3>
       <p> <?php echo $group->description ?> </p>
       <?php
