@@ -1,4 +1,4 @@
-
+<!--
         <div class="pagination pagination-centered">
           <ul>
             <li class="disabled"><a href="#">Prev</a></li>
@@ -10,15 +10,11 @@
             <li><a href="#">Next</a></li>
           </ul>
         </div>
-
+-->
         <div class="container">
           <div class="row center">
-             <div class="span3">
-                <label>Sort By</label>
-                <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-                  <button type="button" class="btn vertical-button-fixed">Group Joined</button>
-                  <button type="button" class="btn vertical-button-fixed">Alphabetical</button>
-                </div>
+             <div class="span2">
+               
             </div>
 
             <div class="span6 offset1"> 

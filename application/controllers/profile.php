@@ -47,5 +47,11 @@ class Profile extends Authentication {
 		$email = $this->input->post('email');
 		print $email;
 	}
+
+	public function update_profile()
+	{
+		echo $this->input->post('gender');
+		echo var_dump($this->input->post('gender'));
+	}
 }
 ?>
