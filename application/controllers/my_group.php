@@ -21,7 +21,7 @@ class My_group extends CI_Controller {
 		$user = $this->session->userdata('email');
 		$this->load->model('group_model');
 		$data['groups'] = $this->group_model->my_group_order_by_name($user);
-		//print_r($data['groups']);
+		$data['order'] = 'Alphabetical';
 
 		$data['activeTab'] = "groupT";
 		$this->load->view('header', $data);
@@ -35,18 +35,21 @@ class My_group extends CI_Controller {
 		if (strcmp($orderBy,"Alphabetical") == 0) {
 			$data['groups'] = $this->group_model->my_group_order_by_name($user);
 			$data['activeTab'] = 'groupT';
+			$data['order'] = 'Alphabetical';
 			$this->load->view('header.php', $data);
 			$this->load->view('my_group_view.php');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
 			$data['groups'] = $this->group_model->my_group_order_by_popularity($user);
 			$data['activeTab'] = 'groupT';
+			$data['order'] = 'Popularity';
 			$this->load->view('header.php', $data);
 			$this->load->view('my_group_view.php');
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
 			$data['groups'] = $this->group_model->my_group_order_by_date_created($user);
 			$data['activeTab'] = 'groupT';
+			$data['order'] = 'DateCreated';
 			$this->load->view('header.php', $data);
 			$this->load->view('my_group_view.php');
 		}

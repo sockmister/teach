@@ -65,15 +65,15 @@ body {
           <div class="row">
             <div class="span4">
               <h2>Currently we have </h2>
-              <p>3000 users, 100 groups, 1000 pairs</p>
+              <p>20 users, 15 groups</p>
             </div>
             <div class="span4">
               <h2>Trending ...</h2>
               <p> 
                 <ol>
-                  <li>Fishing</li>
-                  <li>Juggling</li>
                   <li>Coca Cola</li>
+                  <li>Drumming</li>
+                  <li>Programming</li>
                 </ol>
               </p>
               <p><a class="btn" href="#">View More Groups »</a></p>

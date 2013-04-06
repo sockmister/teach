@@ -30,7 +30,7 @@
           <hr>
           </br>
           <h4><u>Past Comments</u> </h4>
-          <?php if (!empty($skill_comments['skill_comments'])): ?>
+          <?php if (!empty($skill_comments['skill_comment'])): ?>
             <?php foreach ($skill_comments['skill_comments'] as $skill_comment): ?>
             <p><?php echo $skill_comment->Comment ?><br><span class="muted"><small>Posted on <?php echo $skill_comment->Created_on ?> by </small></span> <span class="label label-inverse"><?php echo $skill_comment->Name ?></span> </p>
             <?php endforeach ?>
