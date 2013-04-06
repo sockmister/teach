@@ -7,8 +7,8 @@
             <form method="post" action="<?php echo site_url('profile/update_profile');?>" name="form-profile" id="form-profile">
               <fieldset>              
              <legend>Account Information</legend>
-             <label><?php echo $email; ?></label>
-             <p>youemail@gmail.com</p>
+             <label>Email</label>
+             <p><?php echo $email; ?></p>
              <label>Full Name</label>
              <input class="input-xxlarge" type="text" placeholder="The user's original name" value="<?php echo $name; ?>" name="name">
              <legend>Change Password</legend>
