@@ -52,7 +52,7 @@
           <hr>
           <h4><u>Past Comments</u> </h4>
             <?php foreach ($comments as $curr_comm): ?>
-              <p><?php echo $curr_comm->Comment ?><br><span class="muted"><small>Posted on <?php echo $curr_comm->Created_on ?> by</small></span> <span class="label label-inverse"><?php echo $curr_comm->Name ?></span> </p>
+              <p><?php echo $curr_comm->Comment ?><br><span class="muted"><small>Posted on <?php echo date("d M Y", $curr_comm->Created_on) ?> by</small></span> <span class="label label-inverse"><?php echo $curr_comm->Name ?></span> </p>
             <?php endforeach;?>
 
             <?php } ?>

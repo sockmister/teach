@@ -24,6 +24,7 @@ class Wall extends CI_Controller {
 
 		$this->load->model("friend_model");
 		$data = $this->friend_model->retrieve_friend($user, $user);
+		//print_r($data);
 		$data['activeTab'] = "wallT";
 
 		$this->load->view('header', $data);
@@ -37,8 +38,37 @@ class Wall extends CI_Controller {
 		$user = $this->session->userdata('email');
 		$person = base64_decode($person);
 		$data = $this->friend_model->retrieve_friend($user, $person);
+
 		$data['activeTab'] = "wallT";
 
+		$this->load->view('header', $data);
+		$this->load->view('profile_view');
+	}
+
+	public function new_view($person){
+		$this->load->model("user_model");
+		$this->load->model("friend_model");
+		$this->load->model("group_model");
+		$this->load->model("comment_model");
+
+		$user = $this->session->userdata('email');
+		$person = base64_decode($person);
+
+		$request_from = $this->friend_model->is_friend($user, $person);
+
+		if($person == $friend || $request_from == "accepted"){
+			$data['user'];
+			$data['groups'];
+			$data['friends'];
+			$data['comments'];
+			$data['friend_status'];
+		}
+		else{
+			$data['user'];
+			$data['groups'];
+		}
+
+		$data['activeTab'] = "wallT";
 		$this->load->view('header', $data);
 		$this->load->view('profile_view');
 	}
