@@ -60,7 +60,7 @@
 
           </div><!--/.nav-collapse -->
           <ul class="nav pull-right"> 
-            <li class="nav pull-right"><a  href="#logout">Logout</a></li>
+            <li class="nav pull-right"><a href="<?php echo site_url("/authentication/logout") ?>">Logout</a></li>
 
           </ul>
 

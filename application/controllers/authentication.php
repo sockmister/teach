@@ -28,5 +28,11 @@ class Authentication extends CI_Controller {
 		}
 		return NULL;
 	}
+
+	public function logout() {
+		$this->is_user_logged_in_else_redirect();
+		$this->session->sess_destroy();
+		redirect('welcome/index');
+	}
 }
 ?>
