@@ -4,7 +4,7 @@
         <div class="container">
           <div class="row">
             <div class="span6 center"> 
-            <form method="post" action="/" name="form1" id="form-signup">
+            <form method="post" action="<?php echo site_url('profile/update_profile');?>" name="form-profile" id="form-profile">
               <fieldset>              
              <legend>Account Information</legend>
              <label><?php echo $email; ?></label>
@@ -40,8 +40,7 @@
              <label>Gender</label>
              <p>
              <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-inverse" id="m">Male</button>
-              <button type="button" class="btn btn-inverse" id="f">Female</button>
+              <input type="button" class="btn btn-inverse" id="m" name="gender[]" value="Male" />
             </div>
           </p>
             <label>Handphone Number</label>
