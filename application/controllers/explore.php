@@ -58,6 +58,7 @@ class Explore extends CI_Controller {
 		
 		// by default order by name
 		$data['groups'] = $this->group_model->explore_order_by_name($user);
+		$data['order'] = 'Alphabetical';
 		//print_r($data['groups']);
 		$this->load->view('header.php', $data);
 		$this->load->view('explore_view.php');
@@ -70,18 +71,21 @@ class Explore extends CI_Controller {
 		if (strcmp($orderBy,"Alphabetical") == 0) {
 			$data['groups'] = $this->group_model->explore_order_by_name($user);
 			$data['activeTab'] = 'interestT';
+			$data['order'] = 'Alphabetical';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "Popularity" == 0)) {
 			$data['groups'] = $this->group_model->explore_order_by_popularity($user);
 			$data['activeTab'] = 'interestT';
+			$data['order'] = 'Popularity';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
 		else if (strcmp($orderBy, "DateCreated" == 0)) {
 			$data['groups'] = $this->group_model->explore_order_by_date_created($user);
 			$data['activeTab'] = 'interestT';
+			$data['order'] = 'DateCreated';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}

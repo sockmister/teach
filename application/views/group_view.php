@@ -30,9 +30,9 @@
           <hr>
           </br>
           <h4><u>Past Comments</u> </h4>
-          <?php if (!empty($skill_comments['skill_comment'])): ?>
+          <?php if (!empty($skill_comments['skill_comments'])): ?>
             <?php foreach ($skill_comments['skill_comments'] as $skill_comment): ?>
-            <p><?php echo $skill_comment->Comment ?><br><span class="muted"><small>Posted on <?php echo $skill_comment->Created_on ?> by </small></span> <span class="label label-inverse"><?php echo $skill_comment->Name ?></span> </p>
+            <p><?php echo $skill_comment->Comment ?><br><span class="muted"><small>Posted on <?php echo date("d M Y", $skill_comment->Created_on) ?> by </small></span> <span class="label label-inverse"><?php echo $skill_comment->Name ?></span> </p>
             <?php endforeach ?>
           <?php else: ?>
             <p><small><i>There are no comments for this group yet - be the first to comment!</i></small>
