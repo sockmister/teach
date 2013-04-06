@@ -73,7 +73,7 @@ class My_group extends CI_Controller {
 		if (!empty($data['user_is_member'])){
 			$data['members_in_group'] = $this->group_model->retrieve_group_members($group);
 			$this->load->model('skill_comment_model');
-			$data['skill_comments'] = $this->skill_comment_model->retrieve_skill_comments($group, $user);
+			$data['skill_comments'] = $this->skill_comment_model->retrieve_skill_comments($group);
 		}
 		
 		$data['group'] = $group;

@@ -15,13 +15,13 @@ class Skill_comment_model extends CI_Model {
         $this->db->query($sql, Array($skill, $user, $comment, $timestamp));
     }
 
-    function retrieve_skill_comments($skill, $user){
+    function retrieve_skill_comments($skill){
         $skill = base64_decode($skill);
         $sql = "SELECT sc.Skill, sc.Comment, sc.Created_on, u.Name
                 FROM skill_comment sc, users u
-                WHERE sc.Skill = ? AND sc.Comment_by = ? AND u.Email = ?
+                WHERE sc.Skill = ?
                 ORDER BY sc.Created_on DESC";
-        $query = $this->db->query($sql, Array($skill, $user, $user));
+        $query = $this->db->query($sql, Array($skill));
         $data['skill_comments'] = $query->result();
 
         return $data;
