@@ -19,7 +19,7 @@ class Skill_comment_model extends CI_Model {
         $skill = base64_decode($skill);
         $sql = "SELECT sc.Skill, sc.Comment, sc.Created_on, u.Name
                 FROM skill_comment sc, users u
-                WHERE sc.Skill = ?
+                WHERE sc.Skill = ? AND sc.Comment_by = u.Email
                 ORDER BY sc.Created_on DESC";
         $query = $this->db->query($sql, Array($skill));
         $data['skill_comments'] = $query->result();
