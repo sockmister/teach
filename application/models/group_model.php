@@ -41,23 +41,29 @@ class Group_model extends CI_Model {
         $query = $this->db->query($sql, array($group));
         $data['members'] = $query->result();
 
+        return $data;
+    }
+
+    function retrieve_group_members($group){
+        $group = base64_decode($group); 
+
         //Get Skill member names
         $sql = "SELECT b.user, u.Name
                 FROM belong_to b, users u
                 WHERE b.skill = ? AND b.user = u.Email";
         $query = $this->db->query($sql, array($group));
-        $data['members_in_group'] = $query->result();
+        $data = $query->result();
 
         return $data;
     }
 
-    function retrieve_all_groups($user){
-        $sql = "SELECT s.Name, s.Created_on, s.Description
-                FROM skill s, belong_to b
-                WHERE b.user = '" . $user . "' AND b.skill = s.Name
-                ORDER BY s.Name";
-        $query = $this->db->query($sql);
-        $data['all_groups'] = $query->result();
+    function check_user_belong_to($group, $user){
+        $skill = base64_decode($group);
+        $sql = "SELECT *
+                FROM belong_to b
+                WHERE b.skill = ? AND b.user = ?";
+        $query = $this->db->query($sql, array($skill, $user));
+        $data = $query->result();
 
         return $data;
     }
