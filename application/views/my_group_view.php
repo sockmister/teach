@@ -28,12 +28,13 @@
             <div class="span6 offset1"> 
                
                   <?php if (empty($groups)): ?>
+                  <hr>
                 <h2>You have not joined any of the groups!</h2>
               <?php endif; ?> 
 
           <?php
                foreach ($groups as $group){
-               ?> <hr>   
+               ?><hr>
                 <h3> <a href="<?php echo site_url("my_group/view_group/".base64_encode($group->skill)) ?>"> <?php echo $group->skill ?> </a> <small> <?php echo $group->count ?> members since <?php echo $group->create_on ?> </small> </h3>
                 <a href="<?php echo site_url("my_group/leave/".base64_encode($group->skill)) ?>" class="btn btn-danger btn-small pull-right">Leave</a></h3>
                 <p> <?php echo $group->description ?> </p>
