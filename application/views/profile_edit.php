@@ -40,9 +40,11 @@
              <label>Gender</label>
              <p>
              <div class="btn-group" data-toggle="buttons-radio">
-              <input type="button" class="btn btn-inverse" id="m" name="gender[]" value="Male" />
+              <button type="button" class="btn gender" id="male"/> Male </button> 
+              <button type="button" class="btn gender" id="female"/> Female </button> 
             </div>
           </p>
+            <input class="input" type="hidden" id="gender-input" value="<?php echo $gender; ?>" name="gender"/>
             <label>Handphone Number</label>
             <input class="input-large" type="text" name="phone" value="<?php echo $phone; ?>" placeholder="HP number"/>
             <hr>
@@ -89,6 +91,17 @@ function checkPass()
         message.innerHTML = "Passwords Do Not Match!"
     }
 }
+
+    $(document).ready(function(){
+
+      $(".gender").click(function() {
+        var genderVal = this.id;
+        //alert(this.id);
+        $("#gender-input").val(genderVal);
+      });
+
+    });
+
 </script>
     </body>
     </html>
