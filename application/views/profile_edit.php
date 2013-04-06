@@ -13,10 +13,10 @@
              <input class="input-xxlarge" type="text" placeholder="The user's original name" value="<?php echo $name; ?>" name="name">
              <legend>Change Password</legend>
              <label>Original Password</label>
-             <input class="input-xlarge" type="password" placeholder="Enter original Password">
+             <input class="input-xlarge" type="password" placeholder="Enter original Password" name="old_password">
              <div class="control-group" id="password-error">
 				 <label>New Password</label>
-				 <input class="input-xlarge" type="password" placeholder="New Password" id="password">
+				 <input class="input-xlarge" type="password" placeholder="New Password" id="password" name="new_password">
 			 </div>				 
              <label>Confirm new password</label>
 			 <div class="control-group" id="password-error">

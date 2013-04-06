@@ -1,5 +1,10 @@
 <?php
+if (PHP_VERSION_ID  < 50500) {
+    require_once(BASEPATH.'external_libraries/password_compat/lib/password.php');
+}
+
 class User_model extends CI_Model {
+
 	function __construct()
     {
         // Call the Model constructor
@@ -64,8 +69,44 @@ class User_model extends CI_Model {
         }
     }
 
-    function update_user($user){
+    function update_user_profile($username, $name, $dob, $gender, $phone){
+        $query = "UPDATE users SET " .
+            "name = " . $this->db->escape($name) .
+            ", birthday = " . $this->db->escape($dob) .
+            ", gender = " . $this->db->escape($gender) .
+            ", contact_number = " . $this->db->escape($phone) .
+            " WHERE email = " . $this->db->escape($username);
 
+        $result = $this->db->query($query);
+
+        return $result;
+    }
+
+    function change_user_password($username, $old_password, $new_password) {
+        // Check if password is valid
+        $query = "SELECT u.email, u.password, u.name FROM users u WHERE email = " . 
+            $this->db->escape($username)
+            ;
+        $result = $this->db->query($query);
+
+        if ($result->num_rows() != 1) { 
+            // If user is not found
+            return false;
+        }
+        else {
+            // Begin verification. If password is correct, change password.
+            if (password_verify($old_password, $result->first_row()->Password)) {
+                $password = password_hash($new_password, PASSWORD_DEFAULT);
+                $query = "UPDATE users SET " .
+                    "password = " . $this->db->escape($password) .
+                    " WHERE email = " . $this->db->escape($username);
+                $result = $this->db->query($query);             
+                return $result;
+            }
+            else {
+                return false;
+            }
+        }
     }
 
     function delete_user($user){
