@@ -30,7 +30,7 @@ class User_model extends CI_Model {
     }
 
     function retrieve_user_details($username) {
-        $query = "SELECT Email,Name,Birthday,Gender,Contact_number,Photo FROM users WHERE Email = " . 
+        $query = "SELECT u.email, u.name, u.birthday, u.gender, u.contact_number, u.photo FROM users u WHERE Email = " . 
             $this->db->escape($username)
             ;
         $result = $this->db->query($query);
@@ -51,7 +51,7 @@ class User_model extends CI_Model {
     }
 
     function is_user($username) {
-        $query = "SELECT Email FROM users WHERE Email = " . 
+        $query = "SELECT u.email FROM users u WHERE email = " . 
             $this->db->escape($username)
             ;
         $result = $this->db->query($query);
@@ -74,7 +74,7 @@ class User_model extends CI_Model {
 
     function login($username, $password)
     {
-        $query = "SELECT Email, Password, Name FROM users WHERE Email = " . 
+        $query = "SELECT u.email, u.password, u.name FROM users u WHERE email = " . 
             $this->db->escape($username)
             ;
         $result = $this->db->query($query);
