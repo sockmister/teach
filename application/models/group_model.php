@@ -89,7 +89,7 @@ class Group_model extends CI_Model {
                 WHERE s.name = b1.skill AND NOT EXISTS(
                 SELECT b2.skill FROM belong_to b2 
                 WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
-                GROUP BY b1.skill, s.created_on, s.description 
+                GROUP BY b1.skill
                 ORDER BY b1.skill ASC ";
 
         $query  = $this->db->query($sql);
@@ -106,7 +106,7 @@ class Group_model extends CI_Model {
             WHERE s.name = b1.skill AND NOT EXISTS(
             SELECT b2.skill FROM belong_to b2 
             WHERE b2.user = '" . $user . "' AND b2.skill = b1.skill) 
-            GROUP BY b1.skill, s.created_on, s.description 
+            GROUP BY b1.skill
             ORDER BY COUNT(*) DESC ";
 
         $query  = $this->db->query($sql);
