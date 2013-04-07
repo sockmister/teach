@@ -75,14 +75,14 @@ class Explore extends CI_Controller {
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
-		else if (strcmp($orderBy, "Popularity" == 0)) {
+		else if (strcmp($orderBy, "Popularity") == 0) {
 			$data['groups'] = $this->group_model->explore_order_by_popularity($user);
 			$data['activeTab'] = 'interestT';
 			$data['order'] = 'Popularity';
 			$this->load->view('header.php', $data);
 			$this->load->view('explore_view.php');
 		}
-		else if (strcmp($orderBy, "DateCreated" == 0)) {
+		else if (strcmp($orderBy, "DateCreated") == 0) {
 			$data['groups'] = $this->group_model->explore_order_by_date_created($user);
 			$data['activeTab'] = 'interestT';
 			$data['order'] = 'DateCreated';
