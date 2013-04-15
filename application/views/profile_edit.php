@@ -10,7 +10,7 @@
              <label>Email</label>
              <p><?php echo $email; ?></p>
              <label>Full Name</label>
-             <input class="input-xxlarge" type="text" placeholder="The user's original name" value="<?php echo $name; ?>" name="name">
+             <input class="input-xxlarge" type="text" placeholder="The user's original name" value="<?php echo $name; ?>" name="name" id="name">
              <legend>Change Password</legend>
              <label>Original Password</label>
              <input class="input-xlarge" type="password" placeholder="Enter original Password" name="old_password">
@@ -100,6 +100,20 @@ function checkPass()
         $("#gender-input").val(genderVal);
       });
 
+            $("form").submit(function(){
+              $("#nameMsg").remove();
+
+              var nameVal = $("input#name").val();
+
+              if (nameVal==="")
+              {
+                $("input#name").after('<div class="alert alert-error" id="nameMsg">Please enter your name!</div>');
+                return false;
+              }
+
+              return true;
+
+            });
     });
 
 </script>

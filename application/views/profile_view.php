@@ -47,7 +47,7 @@
           <form method="post" action="<?php echo site_url('wall/postComment'); ?>" id="comment-create">
             <fieldset>
               <label></label>
-              <textarea rows="3" class="span8" name="comment">New Comments</textarea>
+              <textarea rows="3" class="span8" name="comment"></textarea>
             </fieldset>
             <input type="hidden" name="person" value=<?php echo $user[0]->Email ?> />
             <button type="submit" class="btn">Post</button>
@@ -72,33 +72,25 @@
           ================================================== -->
           <!-- Javascript for toggle. Integrate with php -->
           <script>
-          $("#<?php echo $gender; ?>").button('toggle');
-          $('input[id=lefile]').change(function() {
-           $('#photoCover').val($(this).val());
-         });
+          $(document).ready(function(){
 
-          $('#dp').datepicker();
+            $("form").submit(function(){
+              $("#createMsg").remove();
 
-// function to check password as user types
-function checkPass()
-{
+              var comment = $("textarea").val();
 
-  var pass1 = document.getElementById('password');
-  var pass2 = document.getElementById('password-check');
-  var message = document.getElementById('confirmMessage');
-  var goodColor = "#66cc66";
-  var badColor = "#ff6666";
+              if (comment==="")
+              {
+                $("form").after('<div class="alert alert-error" id="createMsg"> Please type some comments! </div>');
+                return false;
+              }
 
-  if(pass1.value == pass2.value){
-    pass2.style.backgroundColor = goodColor;
-    message.style.color = goodColor;
-    message.innerHTML = "Passwords Match!"
-  }else{
-    pass2.style.backgroundColor = badColor;
-    message.style.color = badColor;
-    message.innerHTML = "Passwords Do Not Match!"
-  }
-}
+              return true;
+
+            });
+
+
+      });
 </script>
 </body>
 </html>

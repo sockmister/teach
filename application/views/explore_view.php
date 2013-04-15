@@ -1,26 +1,14 @@
 
-<div class="pagination pagination-centered">
-  <ul>
-    <li class="disabled"><a href="#">Prev</a></li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">Next</a></li>
-  </ul>
-</div>
-
 <div class="container">
   <div class="row center">
    <div class="span3">
     <label>Sort By</label>
     <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
-      <a href="<?php echo site_url("explore/view_all/Popularity") ?>" class="btn vertical-button-fixed">Popularity</a></h3>       
+      <a href="<?php echo site_url("explore/view_all/Popularity") ?>" class="btn vertical-button-fixed" id="Popularity">Popularity</a></h3>       
       <!--<button type="button" class="btn vertical-button-fixed">Popularity</button>-->
-      <a href="<?php echo site_url("explore/view_all/DateCreated") ?>" class="btn vertical-button-fixed">Date Created</a></h3>    
+      <a href="<?php echo site_url("explore/view_all/DateCreated") ?>" class="btn vertical-button-fixed" id="DateCreated">Date Created</a></h3>    
       <!--<button type="button" class="btn vertical-button-fixed">Date Created</button>-->
-      <a href="<?php echo site_url("explore/view_all/Alphabetical") ?>" class="btn vertical-button-fixed">Alphabetical</a></h3> 
+      <a href="<?php echo site_url("explore/view_all/Alphabetical") ?>" class="btn vertical-button-fixed" id="Alphabetical">Alphabetical</a></h3> 
       <!--<button type="button" class="btn vertical-button-fixed">Alphabetical</button>-->
     </div>
     <form method="post" id="group-create">
@@ -57,12 +45,20 @@
   <script>
   $(document).ready(function(){
 
+    $('.order').removeClass('active');
+    $('#<?php echo $order; ?>').addClass('active');
+
     $("form#group-create").submit(function(){
+      $("#createMsg").remove();
 
       var name = $("#groupName").val();
       var description = $("#description").val();
 
-      $("#createMsg").remove(); 
+      if (name==="" || description==="")
+      {
+        $("form#group-create").after('<div class="alert alert-error" id="createMsg"> Please fill up the group name and description! </div>');
+        return false;
+      }
 
       $.post('<?php echo site_url('explore/createGroup'); ?>', { 'groupName': name, 'description': description},
         function(result) {

@@ -97,7 +97,9 @@ body {
                     <span id="confirmMessage" class ="confirmMessage"></span>
                   </div>
                   <label>Full name</label>
+                  <div class="control-group" id="name-error">
                   <input class="span4" placeholder="Full Name" type="text" name="name" id="name">
+                  </div>
                   <button type="submit" id="create-acct" class="btn">Create Account</button>
                 </fieldset>
               </form>
@@ -139,6 +141,7 @@ body {
         var checkVal = $("#password-check").val();
         $('#email-error-text').remove();
         $('#pass-error-text').remove();
+        $('#name-error-text').remove();
 
         if (!validateEmail(emailVal)){
           $("#email-error").removeClass('success').addClass('error'); 
@@ -166,6 +169,19 @@ body {
           $(".password-error").removeClass('error').addClass('success'); 
           $("#password").removeClass('inputError').addClass('inputSuccess'); 
           $("#password-check").removeClass('inputError').addClass("inputSuccess").after('<span class="help-inline" id="pass-error-text">Ok!</span>');
+
+        }
+
+        if (nameVal===""){
+          $("#name-error").removeClass('success').addClass('error'); 
+          $("#name").removeClass('inputSuccess').addClass("inputError").after('<span class="help-inline" id="name-error-text">Please enter your name!</span>');
+          hasError = true;
+        }
+
+        else
+        {
+          $("#name-error").removeClass('error').addClass('success'); 
+          $("#name").removeClass('inputError').addClass("inputSuccess").after('');
 
         }
 
