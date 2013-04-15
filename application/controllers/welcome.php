@@ -29,6 +29,7 @@ class Welcome extends CI_Controller {
 		$this->load->database();
 		$this->load->model('user_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');		
+		$this->db->query("PRAGMA foreign_keys = ON");
 	}
 
 	public function index()

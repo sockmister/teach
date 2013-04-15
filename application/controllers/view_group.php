@@ -10,6 +10,7 @@ class View_group extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		define('ASSEST_URL', base_url().'teach/assets/');		
+		$this->db->query("PRAGMA foreign_keys = ON");
 	}
 
 	//add view group, displaying all friends

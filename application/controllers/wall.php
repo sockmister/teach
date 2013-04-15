@@ -9,7 +9,8 @@ class Wall extends CI_Controller {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
-		define('ASSEST_URL', base_url().'teach/assets/');		
+		define('ASSEST_URL', base_url().'teach/assets/');	
+		$this->db->query("PRAGMA foreign_keys = ON");	
 
 		//check user login here
 		if($this->session->userdata('logged_in') != "true") {

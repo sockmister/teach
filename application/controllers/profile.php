@@ -11,6 +11,7 @@ class Profile extends Authentication {
 		$this->load->database();
 		$this->load->model('user_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');
+		$this->db->query("PRAGMA foreign_keys = ON");
 
 		// If user is not logged on, redirect to login.
 		$this->is_user_logged_in_else_redirect();

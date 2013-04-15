@@ -9,7 +9,7 @@ class Friend extends CI_Controller {
 		// Your own constructor code
 		$this->load->helper('url');
 		$this->load->database();
-		//$this->db->query("PRAGMA foreign_keys = ON");
+		$this->db->query("PRAGMA foreign_keys = ON");
 		define('ASSEST_URL', base_url().'teach/assets/');
 		if($this->session->userdata('logged_in') != "true") {
 			redirect("/welcome/index");

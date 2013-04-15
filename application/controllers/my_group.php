@@ -10,7 +10,8 @@ class My_group extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('group_model','',TRUE);
-		define('ASSEST_URL', base_url().'teach/assets/');		
+		define('ASSEST_URL', base_url().'teach/assets/');	
+		$this->db->query("PRAGMA foreign_keys = ON");	
 		if($this->session->userdata('logged_in') != "true") {
 			redirect("/welcome/index");
 			return;
@@ -113,7 +114,7 @@ class My_group extends CI_Controller {
 		}
 
 		if ($result) {
-			redirect("my_group/view_group/".$encoded_group, 'refresh');
+			$this->index();
 		}
 		else {
 			echo "fail";

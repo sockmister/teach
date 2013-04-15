@@ -11,6 +11,7 @@ class Explore extends CI_Controller {
 		$this->load->database();
 		$this->load->model('group_model','',TRUE);
 		define('ASSEST_URL', base_url().'teach/assets/');	
+		$this->db->query("PRAGMA foreign_keys = ON");
 		if($this->session->userdata('logged_in') != "true") {
 			redirect("/welcome/index");
 			return;

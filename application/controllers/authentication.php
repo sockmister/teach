@@ -5,6 +5,7 @@ class Authentication extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->database();
 		$this->load->model('user_model','',TRUE);
+		$this->db->query("PRAGMA foreign_keys = ON");
 	}
 
 	public function is_user_logged_in_else_redirect() {
